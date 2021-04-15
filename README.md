@@ -1,7 +1,7 @@
 # Trailblazer
-[Backend Repo](https://github.com/nicholascrandall/Trailblazer_API)
+![Wireframe](wireframe.png)
 
-[Wireframe](https://figma.com)
+[Backend Repo](https://github.com/nicholascrandall/Trailblazer_API)
 
 [Heroku Deployment](heroku.com)
 
