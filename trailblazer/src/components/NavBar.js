@@ -10,23 +10,29 @@ export default function NavBar(props) {
         size='large'
         >
         <Container>
-            <Menu.Item as='a' active>
+            <Menu.Item as='a' href='/'>
                 Home
             </Menu.Item>
-            <Menu.Item as='a'><a href='/event'>Find Meetups</a></Menu.Item>
-            <Menu.Item as='a'><a href='#'>Your Trips</a></Menu.Item>
-            <Menu.Item as='a'><a href='#'>Your Profile</a></Menu.Item>
+            <Menu.Item as='a' href='/event' active>Find Meetups</Menu.Item>
+            <Menu.Item as='a'>Your Trips</Menu.Item>
+            <Menu.Item as='a'>Your Profile</Menu.Item>
             <Menu.Item position='right'>
-                <a href='/user/login'>
-                    <Button as='a' inverted={true}>
+                {props.currentUser?
+                <>
+                Welcome, {props.currentUser.username}
+                <Button onClick={props.logout} as='a' href='/user/login' inverted={true} primary={false} style={{ marginLeft: '0.5em' }}>
+                    Log Out
+                </Button>
+                </>:
+                <>
+                <Button as='a' href='/user/login' inverted={true}>
                     Log in
-                    </Button>
-                </a>
-                <a href='/user/new'>
-                    <Button as='a' inverted={true} primary={false} style={{ marginLeft: '0.5em' }}>
+                </Button>
+                <Button as='a' href='/user/new' inverted={true} primary={false} style={{ marginLeft: '0.5em' }}>
                     Sign Up
-                    </Button>
-                </a>
+                </Button>
+                </>
+                }
             </Menu.Item>
         </Container>
     </Menu>
