@@ -34,7 +34,7 @@ export default class UserForm extends Component{
         .then(data => {
             let signUpSuccess = data.status!==400
             let loginSuccess = data.status!==400 && this.props.context === 'login'
-            this.props.setCurrentUser(data.currentUser)
+            // this.props.setCurrentUser(data.currentUser)
             this.setState({
                 username: '',
                 password: '',

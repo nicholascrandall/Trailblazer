@@ -28,6 +28,18 @@ class App extends Component {
     })
   }
 
+  logout = () =>{
+    const url = baseURL + '/session/'
+      fetch(url, {method:'DELETE'})
+      .then(response=> response.json())
+      .then(data => {
+        console.log(data)
+        this.setState({
+          currentUser: ''
+        })
+      })
+    }
+
   render() {
     // console.log(this.state.currentUser)
     return (
@@ -36,7 +48,7 @@ class App extends Component {
           <Switch>
             {/* /// EVENTS INDEX /// */}
             <Route path="/event">
-              <NavBar currentUser={this.state.currentUser}/>
+              <NavBar currentUser={this.state.currentUser} logout={this.logout}/>
               <header className="App-header">
                 <Header className="white" size="huge">Trailblazers</Header>
               </header>
@@ -56,7 +68,7 @@ class App extends Component {
 
             {/* /// HOME PAGE /// *** this must be the last route because its the least specific */}
             <Route path="/">
-              <NavBar currentUser={this.state.currentUser}/>
+              <NavBar currentUser={this.state.currentUser} logout={this.logout}/>
               <header className="App-header">
                 <Header className="white" size="huge">Trailblazers</Header>
               </header>
