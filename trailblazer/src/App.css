@@ -24,8 +24,9 @@
   font-family: 'Poppins', sans-serif !important;
 }
 
-.event-card-grid {
-  margin-top: 40px;
+.event-card-group {
+  margin-top: 50px;
+  width: 60vw !important;
 }
 
 .searchContainer {
