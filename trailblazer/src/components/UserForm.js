@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Grid, Button, Segment, Message, Header, Form} from 'semantic-ui-react'
+import {Grid, Button, Message, Header, Form} from 'semantic-ui-react'
  
 export default class UserForm extends Component{
     constructor(props) {
@@ -7,7 +7,7 @@ export default class UserForm extends Component{
         this.state = {
             username: '',
             password: '',
-            signInSuccess: false
+            signUpSuccess: false
         }
     }
 
@@ -32,7 +32,7 @@ export default class UserForm extends Component{
             this.setState({
                 username: '',
                 password: '',
-                signInSuccess: true
+                signUpSuccess: true
             })
         })
         .catch(err=> console.log(err))
@@ -67,8 +67,7 @@ export default class UserForm extends Component{
                             <> Sign Up </>
                             }
                     </Header>
-                    <Form size='large' style={{width: '50%'}} onSubmit={(event)=>this.handleSubmit(event)}>
-                        <Segment stacked>
+                    <Form size='large' style={{width: '50%'}} onSubmit={(event)=>this.handleSubmit(event)} stacked>
                             <Form.Input 
                                 fluid 
                                 icon='user' 
@@ -90,7 +89,7 @@ export default class UserForm extends Component{
                                 type='password'
                                 onChange={(event)=>this.handleChange(event)}
                             />
-                            {this.state.signInSuccess?
+                            {this.props.context === 'signup' && this.state.signUpSuccess?
                                 <Message color='green'>
                                     New user created! <a href='/user/login'>Sign In!</a>
                                 </Message>: null
@@ -101,7 +100,6 @@ export default class UserForm extends Component{
                                 <> Sign Up </>
                                 }
                             </Button>
-                        </Segment>
                     </Form>
                     {/* User login Message */}
                     {this.props.context === 'login'?
@@ -110,7 +108,7 @@ export default class UserForm extends Component{
                     </Message>:null
                     }
                     {/* User Sign Up Message */}
-                    {this.props.context === 'signup' && !this.state.signInSuccess?
+                    {this.props.context === 'signup' && !this.state.signUpSuccess?
                     <Message color='orange' style={{width: '50%'}}>
                         Already have an account? <a href='/user/login'>Sign In!</a>
                     </Message>:null
