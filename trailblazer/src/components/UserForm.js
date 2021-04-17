@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Grid, Button, Message, Header, Form} from 'semantic-ui-react'
+import {Grid, Button, Message, Header, Form, Icon} from 'semantic-ui-react'
  
 export default class UserForm extends Component{
     constructor(props) {
@@ -43,7 +43,6 @@ export default class UserForm extends Component{
     }
 
     render(){
-        console.log(this.state)
         return (
             <>
             {/* Header Column*/}
@@ -71,7 +70,7 @@ export default class UserForm extends Component{
                             <> Sign Up </>
                             }
                     </Header>
-                    <Form size='large' style={{width: '50%'}} onSubmit={(event)=>this.handleSubmit(event)} stacked>
+                    <Form size='large' style={{width: '50%'}} onSubmit={(event)=>this.handleSubmit(event)}>
                             <Form.Input 
                                 fluid 
                                 icon='user' 
@@ -96,15 +95,17 @@ export default class UserForm extends Component{
 
                             {this.props.context === 'signup' && this.state.signUpSuccess?
                                 <Message color='green'>
+                                    <Icon name='check circle'/>
                                     New user created! <a href='/user/login'>Sign In!</a>
                                 </Message>: null
                             }
                             {this.state.status === 400?
                                 <Message color='red'>
+                                    <Icon name='warning sign'/>
                                     {this.state.message}
                                 </Message>: null
                             }
-                            
+
                             <Button color='teal' fluid size='large'>
                                 {this.props.context === 'login'?
                                 <> Login </>:
