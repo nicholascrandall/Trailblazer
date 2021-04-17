@@ -1,7 +1,6 @@
 import {Container, Menu, Button} from 'semantic-ui-react'
 
 export default function NavBar(props) {
-    console.log(props.currentUser)
   return (
     <Menu
         fixed='top'
@@ -21,23 +20,17 @@ export default function NavBar(props) {
                 {props.currentUser?
                 <>
                 Welcome, {props.currentUser.username}
-                <a href='/user/new'>
-                    <Button as='a' inverted={true} primary={false} style={{ marginLeft: '0.5em' }}>
+                <Button onClick={props.logout()} as='a' inverted={true} primary={false} style={{ marginLeft: '0.5em' }}>
                     Log Out
-                    </Button>
-                </a>
+                </Button>
                 </>:
                 <>
-                <a href='/user/login'>
-                    <Button as='a' inverted={true}>
+                <Button as='a' href='/user/login' inverted={true}>
                     Log in
-                    </Button>
-                </a>
-                <a href='/user/new'>
-                    <Button as='a' inverted={true} primary={false} style={{ marginLeft: '0.5em' }}>
+                </Button>
+                <Button as='a' href='/user/new' inverted={true} primary={false} style={{ marginLeft: '0.5em' }}>
                     Sign Up
-                    </Button>
-                </a>
+                </Button>
                 </>
                 }
             </Menu.Item>

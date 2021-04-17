@@ -1,6 +1,4 @@
 import { Component } from 'react';
-import { Button } from 'semantic-ui-react'
-import { Redirect } from "react-router-dom";
 
 export default class SearchBar extends Component {
     constructor(props) {
@@ -23,11 +21,11 @@ export default class SearchBar extends Component {
 
     render() {
         return (
-            <div class="searchContainer">
+            <div className="searchContainer">
                 <form onSubmit={this.handleSubmit}>
                     <input 
                     type="text"
-                    class="searchInput"
+                    className="searchInput"
                     value={this.searchName}
                     placeholder={"Search For a Meetup In Your Area..."}
                     onChange={this.handleChange}
