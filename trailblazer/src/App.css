@@ -23,3 +23,7 @@
   color: white !important;
   font-family: 'Poppins', sans-serif !important;
 }
+
+.event-card-grid {
+  margin-top: 40px;
+}
