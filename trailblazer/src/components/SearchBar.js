@@ -1,34 +1,43 @@
 import { Component } from 'react';
-import { Button } from 'semantic-ui-react'
-import { Redirect } from "react-router-dom";
 
 export default class SearchBar extends Component {
     constructor(props) {
         super(props)
         this.state = {
             searchName: '',
-            redirect: null,
         }
     }
 
     handleChange = (e) => {
         this.setState({
-            eventName: e.target.value
+            searchName: e.target.value
         })
     }
 
-    handleSubmit = () => {
-
+    handleSubmit = (event) => {
+        event.preventDefault()
+        const url = this.props.baseURL + '/event/search?query='  + this.state.searchName
+        fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            console.log(url);
+            console.log(data);
+            // this.setState({
+            //     events: data
+            //     // need to figure out what to do with this data now that we can search it
+            // })
+        })
     }
 
     render() {
+        console.log(this.state)
         return (
-            <div class="searchContainer">
+            <div className="searchContainer">
                 <form onSubmit={this.handleSubmit}>
                     <input 
                     type="text"
-                    class="searchInput"
-                    value={this.searchName}
+                    className="searchInput"
+                    value={this.state.searchName}
                     placeholder={"Search For a Meetup In Your Area..."}
                     onChange={this.handleChange}
                     />
