@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import NavBar from './components/NavBar'
 import Events from './components/Events'
 import SearchBar from './components/SearchBar'
+import UserForm from './components/UserForm';
 
 let baseURL = '' 
 if (process.env.NODE_ENV === 'development'){
@@ -38,7 +39,12 @@ class App extends Component {
 
             {/* /// User Login /// */}
             <Route path="/user/login">
-              <Header size="large">User Login</Header>
+              <UserForm context='login' baseURL={baseURL}/>
+            </Route>
+
+            {/* /// User Sign Up /// */}
+            <Route path="/user/new">
+              <UserForm context='signup' baseURL={baseURL}/>
             </Route>
 
             {/* /// HOME PAGE /// *** this must be the last route because its the least specific */}
