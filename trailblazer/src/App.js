@@ -37,7 +37,12 @@ class App extends Component {
 
             {/* /// User Login /// */}
             <Route path="/user/login">
-              <UserForm/>
+              <UserForm context='login'/>
+            </Route>
+
+            {/* /// User Sign Up /// */}
+            <Route path="/user/new">
+              <UserForm context='signup'/>
             </Route>
 
             {/* /// HOME PAGE /// *** this must be the last route because its the least specific */}
