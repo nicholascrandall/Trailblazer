@@ -7,6 +7,8 @@ export default class UserForm extends Component{
         this.state = {
             username: '',
             password: '',
+            message: '',
+            status: 200,
             signUpSuccess: false
         }
     }
@@ -27,19 +29,21 @@ export default class UserForm extends Component{
             body: JSON.stringify(this.state),
             headers: {'Content-Type': 'application/json'}
         }).then(response => response.json())
-        .then(data=>{
-            console.log(data)
+        .then(data => {
+            let signUpSuccess = data.status!==400
             this.setState({
                 username: '',
                 password: '',
-                signUpSuccess: true
+                message: data.message,
+                status: data.status,
+                signUpSuccess: signUpSuccess
             })
         })
         .catch(err=> console.log(err))
     }
 
     render(){
-        // console.log(this.state)
+        console.log(this.state)
         return (
             <>
             {/* Header Column*/}
@@ -89,11 +93,18 @@ export default class UserForm extends Component{
                                 type='password'
                                 onChange={(event)=>this.handleChange(event)}
                             />
+
                             {this.props.context === 'signup' && this.state.signUpSuccess?
                                 <Message color='green'>
                                     New user created! <a href='/user/login'>Sign In!</a>
                                 </Message>: null
                             }
+                            {this.state.status === 400?
+                                <Message color='red'>
+                                    {this.state.message}
+                                </Message>: null
+                            }
+                            
                             <Button color='teal' fluid size='large'>
                                 {this.props.context === 'login'?
                                 <> Login </>:
