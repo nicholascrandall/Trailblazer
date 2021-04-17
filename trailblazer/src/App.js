@@ -1,7 +1,8 @@
 import './App.css';
 import { Component } from 'react';
-import {Header} from 'semantic-ui-react'
+import {Header, Grid} from 'semantic-ui-react'
 import NavBar from './components/NavBar'
+import EventCard from './components/EventCard'
 
 let baseURL = '' 
 if (process.env.NODE_ENV === 'development'){
@@ -38,7 +39,14 @@ class App extends Component {
         <header className="App-header">
           <Header className="white" size="huge">Trailblazers</Header>
         </header>
-        {this.state.events && this.state.events.map(event => <h2>{event.name}</h2>)}
+        
+        <Grid container columns={3}>
+          {this.state.events && this.state.events.map(event => 
+            <Grid.Column className="event-card-grid" width={5.3} key={event._id}>
+              <EventCard event={event}/>
+            </Grid.Column>)
+          }
+        </Grid>
       </div>
     );
   }
