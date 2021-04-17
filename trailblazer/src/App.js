@@ -1,12 +1,15 @@
 import './App.css';
 import { Component } from 'react';
-import {Header, Grid} from 'semantic-ui-react'
+import {Header} from 'semantic-ui-react'
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import NavBar from './components/NavBar'
-import EventCard from './components/EventCard'
+import Events from './components/Events'
 
 let baseURL = '' 
 if (process.env.NODE_ENV === 'development'){
   baseURL = 'http://localhost:3003'
+} else {
+  /// set the url to our deployed app url 
 }
 
 class App extends Component {
@@ -17,36 +20,35 @@ class App extends Component {
     }
   }
 
-  getEvents() {
-    const url = baseURL + '/event/'
-    fetch(url)
-    .then(response => response.json())
-    .then(data => {
-      this.setState({
-        events: data
-      })
-    })
-  }
-
-  componentDidMount() {
-    this.getEvents()
-  }
-  
   render() {
     return (
       <div className="App">
-        <NavBar/>
-        <header className="App-header">
-          <Header className="white" size="huge">Trailblazers</Header>
-        </header>
-        
-        <Grid container columns={3}>
-          {this.state.events && this.state.events.map(event => 
-            <Grid.Column className="event-card-grid" width={5.3} key={event._id}>
-              <EventCard event={event}/>
-            </Grid.Column>)
-          }
-        </Grid>
+        <BrowserRouter>
+          <Switch>
+            {/* /// EVENTS INDEX /// */}
+            <Route path="/event">
+              <NavBar/>
+              <header className="App-header">
+                <Header className="white" size="huge">Trailblazers</Header>
+              </header>
+              <Events baseURL={baseURL}/>
+            </Route>
+
+            {/* /// User Login /// */}
+            <Route path="/user/login">
+              <Header size="large">User Login</Header>
+            </Route>
+
+            {/* /// HOME PAGE /// *** this must be the last route because its the least specific */}
+            <Route path="/">
+              <NavBar/>
+              <header className="App-header">
+                <Header className="white" size="huge">Trailblazers</Header>
+              </header>
+              <Header size="large">Home Page</Header>
+            </Route>
+          </Switch>
+        </BrowserRouter>
       </div>
     );
   }
