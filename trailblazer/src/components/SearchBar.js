@@ -5,28 +5,39 @@ export default class SearchBar extends Component {
         super(props)
         this.state = {
             searchName: '',
-            redirect: null,
         }
     }
 
     handleChange = (e) => {
         this.setState({
-            eventName: e.target.value
+            searchName: e.target.value
         })
     }
 
-    handleSubmit = () => {
-
+    handleSubmit = (event) => {
+        event.preventDefault()
+        const url = this.props.baseURL + '/event/search?query='  + this.state.searchName
+        fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            console.log(url);
+            console.log(data);
+            // this.setState({
+            //     events: data
+            //     // need to figure out what to do with this data now that we can search it
+            // })
+        })
     }
 
     render() {
+        console.log(this.state)
         return (
             <div className="searchContainer">
                 <form onSubmit={this.handleSubmit}>
                     <input 
                     type="text"
                     className="searchInput"
-                    value={this.searchName}
+                    value={this.state.searchName}
                     placeholder={"Search For a Meetup In Your Area..."}
                     onChange={this.handleChange}
                     />
