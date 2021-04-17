@@ -29,7 +29,7 @@ export default class Events extends Component {
       return (
           <Grid container columns={3}>
             {this.state.events && this.state.events.map(event => 
-              <Grid.Column className="event-card-grid" width={5.3} key={event._id}>
+              <Grid.Column className="event-card-grid" width={5} key={event._id}>
                 <EventCard event={event}/>
               </Grid.Column>)
             }

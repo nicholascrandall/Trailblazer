@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Grid, Button, Message, Header, Form, Icon} from 'semantic-ui-react'
+import { Redirect } from "react-router-dom";
  
 export default class UserForm extends Component{
     constructor(props) {
@@ -9,7 +10,8 @@ export default class UserForm extends Component{
             password: '',
             message: '',
             status: 200,
-            signUpSuccess: false
+            signUpSuccess: false,
+            loginSuccess: false
         }
     }
 
@@ -31,18 +33,24 @@ export default class UserForm extends Component{
         }).then(response => response.json())
         .then(data => {
             let signUpSuccess = data.status!==400
+            let loginSuccess = data.status!==400 && this.props.context === 'login'
+            this.props.setCurrentUser(data.currentUser)
             this.setState({
                 username: '',
                 password: '',
                 message: data.message,
                 status: data.status,
-                signUpSuccess: signUpSuccess
+                signUpSuccess: signUpSuccess,
+                loginSuccess: loginSuccess
             })
         })
         .catch(err=> console.log(err))
     }
 
     render(){
+        if (this.state.loginSuccess) {
+            return <Redirect to='/event/' />
+          }
         return (
             <>
             {/* Header Column*/}
