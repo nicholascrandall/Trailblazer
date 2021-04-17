@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import {Grid} from 'semantic-ui-react'
+import {Card, Container} from 'semantic-ui-react'
 import EventCard from './EventCard'
 
 export default class Events extends Component {
@@ -27,13 +27,11 @@ export default class Events extends Component {
     
     render() {
       return (
-          <Grid container columns={3}>
-            {this.state.events && this.state.events.map(event => 
-              <Grid.Column className="event-card-grid" width={5} key={event._id}>
-                <EventCard event={event}/>
-              </Grid.Column>)
-            }
-          </Grid>
+        <Container className="event-card-group">
+          <Card.Group centered itemsPerRow={4} >
+            {this.state.events && this.state.events.map(event =><EventCard event={event}/>)}
+          </Card.Group>
+        </Container>
       );
     }
   }

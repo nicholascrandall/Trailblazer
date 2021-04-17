@@ -20,7 +20,7 @@ export default function NavBar(props) {
                 {props.currentUser?
                 <>
                 Welcome, {props.currentUser.username}
-                <Button onClick={props.logout()} as='a' inverted={true} primary={false} style={{ marginLeft: '0.5em' }}>
+                <Button onClick={props.logout} as='a' href='/user/login' inverted={true} primary={false} style={{ marginLeft: '0.5em' }}>
                     Log Out
                 </Button>
                 </>:
