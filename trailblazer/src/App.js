@@ -4,6 +4,7 @@ import {Header} from 'semantic-ui-react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import NavBar from './components/NavBar'
 import Events from './components/Events'
+import SearchBar from './components/SearchBar'
 
 let baseURL = '' 
 if (process.env.NODE_ENV === 'development'){
@@ -31,6 +32,7 @@ class App extends Component {
               <header className="App-header">
                 <Header className="white" size="huge">Trailblazers</Header>
               </header>
+              <SearchBar baseURL={baseURL}/>
               <Events baseURL={baseURL}/>
             </Route>
 
