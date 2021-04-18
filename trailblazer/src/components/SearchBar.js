@@ -18,7 +18,11 @@ export default class SearchBar extends Component {
     handleSubmit = (event) => {
         event.preventDefault()
         const url = this.props.baseURL + '/event/search?query='  + this.state.searchName
-        fetch(url)
+        fetch(url, {
+            method: 'GET', 
+            mode: 'cors', 
+            credentials: 'include',
+          })
         .then(response => response.json())
         .then(data => {
             console.log(url);
@@ -44,10 +48,11 @@ export default class SearchBar extends Component {
                     />
                     <input type="submit" hidden />
                 </form>
-                <Button color='teal' size='large'>
+                {this.props.currentUser?
+                <Button as='a' href='/event/new' color='teal' size='large'>
                         <Icon name='add' position='right'/>
                         Create a Trip
-                </Button>
+                </Button>:null}
             </div>
         )
     }

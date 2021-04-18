@@ -6,6 +6,7 @@ import NavBar from './components/NavBar'
 import Events from './components/Events'
 import SearchBar from './components/SearchBar'
 import UserForm from './components/UserForm';
+import CreateMeetup from './components/CreateMeetup';
 
 let baseURL = '' 
 if (process.env.NODE_ENV === 'development'){
@@ -18,14 +19,34 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentUser: ''
+
+    }
+  }
+
+  getCurrentUser = async () => {
+    const url = baseURL + "/session/"
+    const response = await  fetch(url, {
+        method: 'GET', 
+        mode: 'cors', 
+        credentials: 'include'
+    })
+    if (response.status === 200) {
+      const currentUser = await response.json()
+      console.log(currentUser)
+      console.log(currentUser.currentUser.username)
+      this.setState({
+        currentUser: currentUser.currentUser
+      })
+    } else {
+      const message = await response.json()
+      console.log(message)
     }
   }
 
   setCurrentUser = (user) => {
-    this.setState({
-      currentUser: user
-    })
+    // this.setState({
+    //   currentUser: user
+    // })
   }
 
   logout = () =>{
@@ -40,19 +61,33 @@ class App extends Component {
       })
     }
 
+    componentWillMount=()=>{
+      this.getCurrentUser()
+    }
+
   render() {
+    console.log(this.state.currentUser)
     return (
       <div className="App">
         <BrowserRouter>
           <Switch>
+              {/* /// New Event /// */}
+              <Route path="/event/new">
+              <NavBar currentUser={this.state.currentUser} logout={this.logout}/>
+              <header className="App-header">
+                <Header className="white" size="huge">Trailblazers</Header>
+              </header>
+              <CreateMeetup/>
+            </Route>
+
             {/* /// EVENTS INDEX /// */}
             <Route path="/event">
               <NavBar currentUser={this.state.currentUser} logout={this.logout}/>
               <header className="App-header">
                 <Header className="white" size="huge">Trailblazers</Header>
               </header>
-              <SearchBar baseURL={baseURL}/>
-              <Events baseURL={baseURL}/>
+              <SearchBar baseURL={baseURL} currentUser={this.state.currentUser}/>
+              <Events baseURL={baseURL} setCurrentUser={this.setCurrentUser}/>
             </Route>
 
             {/* /// User Login /// */}

@@ -12,11 +12,16 @@ export default class Events extends Component {
   
     getEvents() {
       const url = this.props.baseURL + '/event/'
-      fetch(url)
+      fetch(url, {
+        method: 'GET', 
+        mode: 'cors', 
+        credentials: 'include',
+      })
       .then(response => response.json())
       .then(data => {
+        this.props.setCurrentUser(data.currentUser)
         this.setState({
-          events: data
+          events: data.data
         })
       })
     }
@@ -29,7 +34,7 @@ export default class Events extends Component {
       return (
         <Container className="event-card-group">
           <Card.Group centered itemsPerRow={3} >
-            {this.state.events && this.state.events.map(event =><EventCard event={event}/>)}
+            {this.state.events && this.state.events.map(event =><EventCard key={event._id} event={event}/>)}
           </Card.Group>
         </Container>
       );

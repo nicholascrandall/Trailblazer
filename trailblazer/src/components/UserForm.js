@@ -29,7 +29,9 @@ export default class UserForm extends Component{
         fetch(url, {
             method:'POST',
             body: JSON.stringify(this.state),
-            headers: {'Content-Type': 'application/json'}
+            headers: {'Content-Type': 'application/json'},
+            mode: 'cors', 
+            credentials: 'include'
         }).then(response => response.json())
         .then(data => {
             let signUpSuccess = data.status!==400
