@@ -32,8 +32,6 @@ class App extends Component {
     })
     if (response.status === 200) {
       const currentUser = await response.json()
-      console.log(currentUser)
-      console.log(currentUser.currentUser.username)
       this.setState({
         currentUser: currentUser.currentUser
       })
@@ -44,6 +42,7 @@ class App extends Component {
   }
 
   setCurrentUser = (user) => {
+    // This may not be necessary anymore with getcurrentuser being called in com did mount
     // this.setState({
     //   currentUser: user
     // })
@@ -61,7 +60,7 @@ class App extends Component {
       })
     }
 
-    componentWillMount=()=>{
+    componentDidMount=()=>{
       this.getCurrentUser()
     }
 
