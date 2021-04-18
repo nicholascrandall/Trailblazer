@@ -28,7 +28,7 @@ export default class Events extends Component {
     render() {
       return (
         <Container className="event-card-group">
-          <Card.Group centered itemsPerRow={4} >
+          <Card.Group centered itemsPerRow={3} >
             {this.state.events && this.state.events.map(event =><EventCard event={event}/>)}
           </Card.Group>
         </Container>

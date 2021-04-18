@@ -14,8 +14,10 @@ export default function NavBar(props) {
                 Home
             </Menu.Item>
             <Menu.Item as='a' href='/event' active>Find Meetups</Menu.Item>
-            <Menu.Item as='a'>Your Trips</Menu.Item>
-            <Menu.Item as='a'>Your Profile</Menu.Item>
+            {props.currentUser?
+                <><Menu.Item as='a'>Your Trips</Menu.Item>
+                <Menu.Item as='a'>Your Profile</Menu.Item></>: null
+            }
             <Menu.Item position='right'>
                 {props.currentUser?
                 <>

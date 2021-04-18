@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import {Button, Icon} from 'semantic-ui-react'
 
 export default class SearchBar extends Component {
     constructor(props) {
@@ -43,7 +44,11 @@ export default class SearchBar extends Component {
                     />
                     <input type="submit" hidden />
                 </form>
-           </div>
+                <Button color='teal' size='large'>
+                        <Icon name='add' position='right'/>
+                        Create a Trip
+                </Button>
+            </div>
         )
     }
 }

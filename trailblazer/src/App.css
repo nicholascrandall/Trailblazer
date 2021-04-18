@@ -25,13 +25,17 @@
 }
 
 .event-card-group {
-  margin-top: 50px;
+  padding: 50px 0;
   width: 60vw !important;
 }
 
 .searchContainer {
   padding-top: 15px;
-  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 60%;
+  margin:0 auto;
 }
 
 .searchInput {
@@ -46,7 +50,7 @@
   background-size: 18px 18px;
   background-position: 95% center;
   border-radius: 50px;
-  border: 1px solid #575756;
+  border: 1px solid #575756a5;
   transition: all 250ms ease-in-out;
   backface-visibility: hidden;
   transform-style: preserve-3d;
@@ -56,7 +60,8 @@
     padding: 12px 0;
     outline: 0;
     border: 1px solid transparent;
-    border-bottom: 1px solid #575756;
+    /* border-bottom: 1px solid #575756; */
+    border-bottom: 2px solid rgb(9, 174, 174);
     border-radius: 0;
     background-position: 100% center;
 }
