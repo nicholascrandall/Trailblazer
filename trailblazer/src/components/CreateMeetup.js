@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import {Form, Button, Dropdown, TextArea} from 'semantic-ui-react'
+import {Form, Button, Header} from 'semantic-ui-react'
+import faker from 'faker'
+import _ from 'lodash'
 
 
 const activityOptions = [
@@ -14,16 +16,51 @@ const activityOptions = [
     { key: 'Swimming', value: 'Swimming', text: 'Swimming' },
     { key: 'Climbing', value: 'Climbing', text: 'Climbing' },
     { key: 'Skiing/Snowboarding', value: 'Skiing/Snowboarding', text: 'Skiing/Snowboarding' },
+    { key: 'Ice Climbing', value: 'Ice Climbing', text: 'Ice Climbing' },
+    { key: 'Camping', value: 'Camping', text: 'Camping' },
   ]
+
+const suppliesOptions = [
+    { key: 'Backpack', text: 'Backpack', value: 'Backpack' },
+    { key: 'Hiking Boots', text: 'Hiking Boots', value: 'Hiking Boots' },
+    { key: 'Snacks', text: 'Snacks', value: 'Snacks' },
+    { key: 'Mountain Bike', text: 'Mountain Bike', value: 'Mountain Bike' },
+    { key: 'Road Bike', text: 'Road Bike', value: 'Road Bike' },
+    { key: 'Helmet', text: 'Helmet', value: 'Helmet' },
+    { key: 'Warm Layer', text: 'Warm Layer', value: 'Warm Layer' },
+    { key: 'Tent', text: 'Tent', value: 'Tent' },
+  ]
+
+const addressDefinitions = faker.definitions.address
+const stateOptions = _.map(addressDefinitions.state, (state, index) => ({
+        key: addressDefinitions.state_abbr[index],
+        text: state,
+        value: addressDefinitions.state_abbr[index],
+    }))
 
   
 export default class CreateMeetup extends Component {
     constructor(props) {
         super(props);
-        
+        this.state={
+            suppliesOptions: suppliesOptions
+        }
     }
 
-    handleChange=(event)=>{
+    handleAddition = (event, { value }) => {
+        this.setState((prevState) => ({
+            suppliesOptions: [{ text: value, value }, ...prevState.suppliesOptions],
+        }))
+      }
+
+      
+    handleSuppliesChange=(event, { value })=>{
+        this.setState({
+            currentSupplies: value 
+            })
+    }
+
+    handleChange = (event) => {
 
     }
 
@@ -33,8 +70,12 @@ export default class CreateMeetup extends Component {
 
     
     render() {
+        let currentSupplies = []
+        this.state.currentSupplies? { currentSupplies } = this.state: currentSupplies = [];
         return(
-            <Form size='large' style={{width: '50%', margin:'0 auto', padding:'50px 0'}} onSubmit={(event)=>this.handleSubmit(event)}>
+            <>
+            <Header as='h2'>Create A New Trip</Header>
+            <Form size='large' style={{width: '50%', margin:'0 auto', padding:'20px 0'}} onSubmit={(event)=>this.handleSubmit(event)}>
                 <Form.Input 
                     fluid 
                     name='name'
@@ -55,10 +96,20 @@ export default class CreateMeetup extends Component {
                 <Form.Input
                     fluid
                     icon='compass'
-                    name='location'
-                    id='location'
+                    name='city'
+                    id='city'
                     iconPosition='left'
-                    placeholder='Location'
+                    placeholder='City'
+                    onChange={(event)=>this.handleChange(event)}
+                />
+                <Form.Dropdown
+                    options={stateOptions} 
+                    placeholder='State'
+                    search
+                    selection
+                    fluid
+                    name='state'
+                    id='state'
                     onChange={(event)=>this.handleChange(event)}
                 />
                 <Form.Input
@@ -93,7 +144,7 @@ export default class CreateMeetup extends Component {
                     min="1"
                     onChange={(event)=>this.handleChange(event)}
                 />
-                <Dropdown
+                <Form.Dropdown
                     placeholder='Activity Type'
                     fluid
                     search
@@ -103,18 +154,33 @@ export default class CreateMeetup extends Component {
                     options={activityOptions}
                     onChange={(event)=>this.handleChange(event)}
                 />
+                <Form.Dropdown
+                    options={this.state.suppliesOptions}
+                    placeholder='Supplies'
+                    search
+                    selection
+                    fluid
+                    multiple
+                    allowAdditions
+                    name='supplies'
+                    id='supplies'
+                    value={currentSupplies}
+                    onAddItem={this.handleAddition}
+                    onChange={this.handleSuppliesChange}
+                />
                 <Form.Input 
-                    placeholder='Please list a description including any supplies needed' 
-                    name="supplies"
-                    id="supplies"
+                    placeholder='Please provide a description of your trip' 
+                    name="description"
+                    id="description"
                     type='textarea'
-                    style={{ minHeight: 100, marginTop:'20px'}}
+                    style={{ minHeight: 100}}
                     onChange={(event)=>this.handleChange(event)}
                  />
                 <Button color='teal' fluid size='large' style={{marginTop:'50px'}}  >
                     Create New Trip
                 </Button>
         </Form>
+        </>
         )
     }
 }
