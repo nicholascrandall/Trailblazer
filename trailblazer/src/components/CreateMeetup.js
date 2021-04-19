@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {Form, Button, Header} from 'semantic-ui-react'
+import { Redirect } from "react-router-dom";
 import faker from 'faker'
 import _ from 'lodash'
-
 
 const activityOptions = [
     { key: 'Mountain Biking', value: 'Mountain Biking', text: 'Mountain Biking' },
@@ -43,6 +43,7 @@ export default class CreateMeetup extends Component {
     constructor(props) {
         super(props);
         this.state={
+            created: false,
             suppliesOptions: suppliesOptions
         }
     }
@@ -67,7 +68,6 @@ export default class CreateMeetup extends Component {
     }
 
     handleChange = (event) => {
-        console.log(event.target.value);
         this.setState({
             [event.target.id]: event.target.value
         })
@@ -81,13 +81,13 @@ export default class CreateMeetup extends Component {
             city: this.state.city,
             state: this.state.state,
             date: this.state.date,
-            creator: this.props.currentUser, 
+            creator: this.props.currentUser.username, 
             maxAttendees: this.state.maxAttendees,
-            description: this.state.description,
             details:{
                 difficulty: this.state.difficulty, 
                 activityType: this.state.activityType,
-                supplies: this.state.supplies
+                supplies: this.state.supplies,
+                description: this.state.description
                 },
             img: this.state.img
         }
@@ -99,13 +99,22 @@ export default class CreateMeetup extends Component {
             credentials: 'include'
         }).then(response => response.json())
         .then(data => {
+            console.log(data.status);
             console.log(data);
+            if(data.status === 200) {
+                this.setState({
+                    created:true
+                })
+            }
         })
     }
 
     
     render() {
-        console.log(this.state);
+        console.log(this.state.created);
+        if (this.state.created) {
+            return <Redirect to='/event/' />
+          }
         let currentSupplies = []
         this.state.currentSupplies? { currentSupplies } = this.state: currentSupplies = [];
         return(
