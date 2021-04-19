@@ -60,7 +60,17 @@ export default class CreateMeetup extends Component {
             })
     }
 
+    handleDropDown = (event, data) => {
+        this.setState({
+            [data.id]: data.value
+        })
+    }
+
     handleChange = (event) => {
+        console.log(event.target.value);
+        this.setState({
+            [event.target.id]: event.target.value
+        })
 
     }
 
@@ -70,6 +80,7 @@ export default class CreateMeetup extends Component {
 
     
     render() {
+        console.log(this.state);
         let currentSupplies = []
         this.state.currentSupplies? { currentSupplies } = this.state: currentSupplies = [];
         return(
@@ -110,15 +121,13 @@ export default class CreateMeetup extends Component {
                     fluid
                     name='state'
                     id='state'
-                    onChange={(event)=>this.handleChange(event)}
+                    onChange={this.handleDropDown}
                 />
                 <Form.Input
                     fluid
-                    icon='calendar'
                     name='date'
                     id='date'
-                    iconPosition='left'
-                    placeholder='Date'
+                    placeholder='Event Date'
                     type="date"
                     onChange={(event)=>this.handleChange(event)}
                 />
@@ -152,7 +161,7 @@ export default class CreateMeetup extends Component {
                     name='activityType'
                     id='activityType'
                     options={activityOptions}
-                    onChange={(event)=>this.handleChange(event)}
+                    onChange={this.handleDropDown}
                 />
                 <Form.Dropdown
                     options={this.state.suppliesOptions}
@@ -168,11 +177,10 @@ export default class CreateMeetup extends Component {
                     onAddItem={this.handleAddition}
                     onChange={this.handleSuppliesChange}
                 />
-                <Form.Input 
+                <Form.TextArea 
                     placeholder='Please provide a description of your trip' 
                     name="description"
                     id="description"
-                    type='textarea'
                     style={{ minHeight: 100}}
                     onChange={(event)=>this.handleChange(event)}
                  />
