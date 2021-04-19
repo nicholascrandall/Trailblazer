@@ -76,7 +76,7 @@ class App extends Component {
               <header className="App-header">
                 <Header className="white" size="huge">Trailblazers</Header>
               </header>
-              <CreateMeetup/>
+              <CreateMeetup baseURL={baseURL} currentUser={this.state.currentUser}/>
             </Route>
 
             {/* /// EVENTS INDEX /// */}

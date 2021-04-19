@@ -75,7 +75,32 @@ export default class CreateMeetup extends Component {
     }
 
     handleSubmit=(event)=>{
-
+        const url = this.props.baseURL + '/event/'
+        const newTrip = {
+            name: this.state.name,
+            city: this.state.city,
+            state: this.state.state,
+            date: this.state.date,
+            creator: this.props.currentUser, 
+            maxAttendees: this.state.maxAttendees,
+            description: this.state.description,
+            details:{
+                difficulty: this.state.difficulty, 
+                activityType: this.state.activityType,
+                supplies: this.state.supplies
+                },
+            img: this.state.img
+        }
+        fetch(url, {
+            method:'POST',
+            body: JSON.stringify(newTrip),
+            headers: {'Content-Type': 'application/json'},
+            mode: 'cors', 
+            credentials: 'include'
+        }).then(response => response.json())
+        .then(data => {
+            console.log(data);
+        })
     }
 
     
