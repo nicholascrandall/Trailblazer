@@ -49,10 +49,12 @@ export default class SearchBar extends Component {
                     <input type="submit" hidden />
                 </form>
                 {this.props.currentUser?
-                <Button as='a' href='/event/new' color='teal' size='large'>
-                        <Icon name='add' position='right'/>
-                        Create a Trip
-                </Button>:null}
+                <Link to='/event/new'>
+                    <Button color='teal' size='large'>
+                            <Icon name='add' position='right'/>
+                            Create a Trip
+                    </Button>
+                </Link>:null}
             </div>
         )
     }

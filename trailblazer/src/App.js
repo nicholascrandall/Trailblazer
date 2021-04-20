@@ -23,29 +23,10 @@ class App extends Component {
     }
   }
 
-  getCurrentUser = async () => {
-    const url = baseURL + "/session/"
-    const response = await  fetch(url, {
-        method: 'GET', 
-        mode: 'cors', 
-        credentials: 'include'
-    })
-    if (response.status === 200) {
-      const currentUser = await response.json()
-      this.setState({
-        currentUser: currentUser.currentUser
-      })
-    } else {
-      const message = await response.json()
-      console.log(message)
-    }
-  }
-
   setCurrentUser = (user) => {
-    // This may not be necessary anymore with getcurrentuser being called in com did mount
-    // this.setState({
-    //   currentUser: user
-    // })
+    this.setState({
+      currentUser: user
+    })
   }
 
   logout = () =>{
@@ -58,10 +39,6 @@ class App extends Component {
           currentUser: ''
         })
       })
-    }
-
-    componentDidMount=()=>{
-      this.getCurrentUser()
     }
 
   render() {
@@ -86,7 +63,7 @@ class App extends Component {
                 <Header className="white" size="huge">Trailblazers</Header>
               </header>
               <SearchBar baseURL={baseURL} currentUser={this.state.currentUser}/>
-              <Events baseURL={baseURL} setCurrentUser={this.setCurrentUser}/>
+              <Events baseURL={baseURL}/>
             </Route>
 
             {/* /// User Login /// */}
