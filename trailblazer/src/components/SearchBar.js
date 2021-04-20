@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import {Button, Icon} from 'semantic-ui-react'
+import {Link} from 'react-router-dom'
 
 export default class SearchBar extends Component {
     constructor(props) {

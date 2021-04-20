@@ -19,7 +19,6 @@ export default class Events extends Component {
       })
       .then(response => response.json())
       .then(data => {
-        // this.props.setCurrentUser(data.currentUser)
         this.setState({
           events: data.data
         })
