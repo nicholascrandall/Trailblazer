@@ -1,4 +1,5 @@
 import {Container, Menu, Button} from 'semantic-ui-react'
+import {Link} from 'react-router-dom'
 
 export default function NavBar(props) {
   return (
@@ -10,29 +11,38 @@ export default function NavBar(props) {
         size='large'
         >
         <Container>
-            <Menu.Item as='a' href='/'>
-                Home
-            </Menu.Item>
-            <Menu.Item as='a' href='/event' active>Find Meetups</Menu.Item>
+            <Link to='/'>
+                <Menu.Item>Home</Menu.Item>
+            </Link>
+
+            <Link to='/event'><Menu.Item>Find Meetups</Menu.Item></Link>
             {props.currentUser?
-                <><Menu.Item as='a'>Your Trips</Menu.Item>
-                <Menu.Item as='a'>Your Profile</Menu.Item></>: null
+                <>
+                <Link to='/'><Menu.Item>Your Trips</Menu.Item></Link>
+                <Link to='/'><Menu.Item>Your Profile</Menu.Item></Link>
+                </>: null
             }
             <Menu.Item position='right'>
                 {props.currentUser?
                 <>
                 Welcome, {props.currentUser.username}
-                <Button onClick={props.logout} as='a' href='/user/login' inverted={true} primary={false} style={{ marginLeft: '0.5em' }}>
-                    Log Out
-                </Button>
+                <Link to='/user/login'>
+                    <Button onClick={props.logout} inverted={true} primary={false} style={{ marginLeft: '0.5em' }}>
+                        Log Out
+                    </Button>
+                </Link>
                 </>:
                 <>
-                <Button as='a' href='/user/login' inverted={true}>
-                    Log in
-                </Button>
-                <Button as='a' href='/user/new' inverted={true} primary={false} style={{ marginLeft: '0.5em' }}>
-                    Sign Up
-                </Button>
+                <Link to='/user/login'>
+                    <Button inverted={true}>
+                        Log in
+                    </Button>
+                </Link>
+                <Link to='/user/new'>
+                    <Button inverted={true} primary={false} style={{ marginLeft: '0.5em' }}>
+                        Sign Up
+                    </Button>
+                </Link>
                 </>
                 }
             </Menu.Item>

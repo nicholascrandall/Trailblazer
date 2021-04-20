@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import {Button, Icon} from 'semantic-ui-react'
+import {Link} from 'react-router-dom'
 
 export default class SearchBar extends Component {
     constructor(props) {
@@ -49,10 +50,12 @@ export default class SearchBar extends Component {
                     <input type="submit" hidden />
                 </form>
                 {this.props.currentUser?
-                <Button as='a' href='/event/new' color='teal' size='large'>
-                        <Icon name='add' position='right'/>
-                        Create a Trip
-                </Button>:null}
+                <Link to='/event/new'>
+                    <Button color='teal' size='large'>
+                            <Icon name='add' position='right'/>
+                            Create a Trip
+                    </Button>
+                </Link>:null}
             </div>
         )
     }
