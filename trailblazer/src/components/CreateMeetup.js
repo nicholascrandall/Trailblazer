@@ -111,7 +111,7 @@ export default class CreateMeetup extends Component {
 
     
     render() {
-        console.log(this.state.created);
+        console.log(this.props);
         if (this.state.created) {
             return <Redirect to='/event/' />
           }
@@ -119,6 +119,7 @@ export default class CreateMeetup extends Component {
         this.state.currentSupplies? { currentSupplies } = this.state: currentSupplies = [];
         return(
             <>
+            
             <Header as='h2'>Create A New Trip</Header>
             <Form size='large' style={{width: '50%', margin:'0 auto', padding:'20px 0'}} onSubmit={(event)=>this.handleSubmit(event)}>
                 <Form.Input 
