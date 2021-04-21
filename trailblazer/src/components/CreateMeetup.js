@@ -54,7 +54,7 @@ export default class CreateMeetup extends Component {
                 name: this.props.editEvent.name,
                 city: this.props.editEvent.city,
                 state: this.props.editEvent.state,
-                date: this.props.editEvent.date,
+                date: this.props.editEvent.date.split('T')[0],
                 creator: this.props.currentUser.username, 
                 maxAttendees: this.props.editEvent.maxAttendees,
                 difficulty: this.props.editEvent.details.difficulty, 
@@ -92,8 +92,12 @@ export default class CreateMeetup extends Component {
     }
 
     handleSubmit=(event)=>{
-        const url = this.props.baseURL + '/event/'
-        const newTrip = {
+        let url=''
+        this.props.context=== 'new'? 
+            url = this.props.baseURL + '/event/':
+            url = this.props.baseURL + '/event/' +  this.props.editEvent._id
+
+        const trip = {
             name: this.state.name,
             city: this.state.city,
             state: this.state.state,
@@ -108,9 +112,15 @@ export default class CreateMeetup extends Component {
                 },
             img: this.state.img
         }
+
+        let method = ''
+        this.props.context=== 'new'? 
+            method = 'POST':
+            method = 'PUT'
+
         fetch(url, {
-            method:'POST',
-            body: JSON.stringify(newTrip),
+            method: method,
+            body: JSON.stringify(trip),
             headers: {'Content-Type': 'application/json'},
             mode: 'cors', 
             credentials: 'include'
@@ -128,7 +138,6 @@ export default class CreateMeetup extends Component {
 
     
     render() {
-        let editEvent = this.props.editEvent
         console.log(this.props);
         console.log(this.state);
         if (this.state.created) {
