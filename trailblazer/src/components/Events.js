@@ -28,12 +28,12 @@ export default class Events extends Component {
     componentDidMount() {
       this.getEvents()
     }
-    
+   
     render() {
       return (
         <Container className="event-card-group">
           <Card.Group centered itemsPerRow={3} >
-            {this.state.events && this.state.events.map(event =><EventCard key={event._id} event={event}/>)}
+            {this.state.events && this.state.events.map(event =><EventCard key={event._id} event={event} setEvent={this.props.setEvent} />)}
           </Card.Group>
         </Container>
       );

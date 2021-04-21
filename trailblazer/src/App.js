@@ -7,6 +7,7 @@ import Events from './components/Events'
 import SearchBar from './components/SearchBar'
 import UserForm from './components/UserForm';
 import CreateMeetup from './components/CreateMeetup';
+import EventPage from './components/EventPage'
 
 let baseURL = '' 
 if (process.env.NODE_ENV === 'development'){
@@ -27,6 +28,13 @@ class App extends Component {
     this.setState({
       currentUser: user
     })
+  }
+
+  setEvent = (event) => {
+    this.setState({
+      currentEvent: event
+    })
+    console.log(this.state.currentEvent)
   }
 
   logout = () =>{
@@ -56,6 +64,15 @@ class App extends Component {
               <CreateMeetup baseURL={baseURL} currentUser={this.state.currentUser}/>
             </Route>
 
+            {/* EVENT SHOW PAGE */}
+            <Route path="/event/meetup">
+              <NavBar currentUser={this.state.currentUser} logout={this.logout}/>
+              <header className="App-header">
+                <Header className="white" size="huge">Trailblazers</Header>
+              </header>
+              <EventPage baseURL={baseURL} currentUser={this.state.currentUser} currentEvent={this.state.currentEvent} />
+            </Route>
+
             {/* /// EVENTS INDEX /// */}
             <Route path="/event">
               <NavBar currentUser={this.state.currentUser} logout={this.logout}/>
@@ -63,7 +80,7 @@ class App extends Component {
                 <Header className="white" size="huge">Trailblazers</Header>
               </header>
               <SearchBar baseURL={baseURL} currentUser={this.state.currentUser}/>
-              <Events baseURL={baseURL}/>
+              <Events baseURL={baseURL} setEvent={this.setEvent} />
             </Route>
 
             {/* /// User Login /// */}
