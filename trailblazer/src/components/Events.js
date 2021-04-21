@@ -38,7 +38,7 @@ export default class Events extends Component {
                 key={event._id} 
                 event={event} 
                 setEvent={this.props.setEvent} 
-                editEvent={this.editEvent}/>)}
+                />)}
           </Card.Group>
         </Container>
       );
