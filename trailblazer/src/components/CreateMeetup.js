@@ -42,10 +42,27 @@ const stateOptions = _.map(addressDefinitions.state, (state, index) => ({
 export default class CreateMeetup extends Component {
     constructor(props) {
         super(props);
-        this.state={
-            created: false,
-            suppliesOptions: suppliesOptions
-        }
+        this.props.context === 'new'?
+            this.state={
+                created: false,
+                suppliesOptions: suppliesOptions,
+            } :
+            this.state={
+                created: false,
+                suppliesOptions: suppliesOptions,
+                currentSupplies: this.props.editEvent.details.supplies,
+                name: this.props.editEvent.name,
+                city: this.props.editEvent.city,
+                state: this.props.editEvent.state,
+                date: this.props.editEvent.date,
+                creator: this.props.currentUser.username, 
+                maxAttendees: this.props.editEvent.maxAttendees,
+                difficulty: this.props.editEvent.details.difficulty, 
+                activityType: this.props.editEvent.details.activityType,
+                description: this.props.editEvent.details.description,
+                img: this.props.editEvent.img
+            } 
+
     }
 
     handleAddition = (event, { value }) => {
@@ -80,13 +97,13 @@ export default class CreateMeetup extends Component {
             name: this.state.name,
             city: this.state.city,
             state: this.state.state,
-            date: this.state.date,
+            date: this.state.date.split('T')[0],
             creator: this.props.currentUser.username, 
             maxAttendees: this.state.maxAttendees,
             details:{
                 difficulty: this.state.difficulty, 
                 activityType: this.state.activityType,
-                supplies: this.state.supplies,
+                supplies: this.state.currentSupplies,
                 description: this.state.description
                 },
             img: this.state.img
@@ -111,7 +128,9 @@ export default class CreateMeetup extends Component {
 
     
     render() {
+        let editEvent = this.props.editEvent
         console.log(this.props);
+        console.log(this.state);
         if (this.state.created) {
             return <Redirect to='/event/' />
           }
@@ -120,7 +139,10 @@ export default class CreateMeetup extends Component {
         return(
             <>
             
-            <Header as='h2'>Create A New Trip</Header>
+            {this.props.context === 'edit'? 
+            <Header as='h2'>Edit {this.state.name}</Header>:
+            <Header as='h2'>Create A New Trip</Header>}
+
             <Form size='large' style={{width: '50%', margin:'0 auto', padding:'20px 0'}} onSubmit={(event)=>this.handleSubmit(event)}>
                 <Form.Input 
                     fluid 
@@ -128,6 +150,7 @@ export default class CreateMeetup extends Component {
                     id='name'
                     placeholder='Trip Name' 
                     required
+                    value= {this.state.name}
                     onChange={(event)=>this.handleChange(event)}
                     />
                 <Form.Input
@@ -137,6 +160,7 @@ export default class CreateMeetup extends Component {
                     id='img'
                     iconPosition='left'
                     placeholder='Link to Image'
+                    value= {this.state.img}
                     onChange={(event)=>this.handleChange(event)}
                 />
                 <Form.Input
@@ -146,6 +170,7 @@ export default class CreateMeetup extends Component {
                     id='city'
                     iconPosition='left'
                     placeholder='City'
+                    value= {this.state.city}
                     onChange={(event)=>this.handleChange(event)}
                 />
                 <Form.Dropdown
@@ -156,6 +181,7 @@ export default class CreateMeetup extends Component {
                     fluid
                     name='state'
                     id='state'
+                    value= {this.state.state}
                     onChange={this.handleDropDown}
                 />
                 <Form.Input
@@ -164,6 +190,7 @@ export default class CreateMeetup extends Component {
                     id='date'
                     placeholder='Event Date'
                     type="date"
+                    value= {this.state.date}
                     onChange={(event)=>this.handleChange(event)}
                 />
                 <Form.Input
@@ -174,6 +201,7 @@ export default class CreateMeetup extends Component {
                     iconPosition='left'
                     placeholder='Number of Attendees'
                     type="number"
+                    value= {this.state.maxAttendees}
                     onChange={(event)=>this.handleChange(event)}
                 />
                 <Form.Input
@@ -186,6 +214,7 @@ export default class CreateMeetup extends Component {
                     type="number"
                     max="5"
                     min="1"
+                    value= {this.state.difficulty}
                     onChange={(event)=>this.handleChange(event)}
                 />
                 <Form.Dropdown
@@ -196,6 +225,7 @@ export default class CreateMeetup extends Component {
                     name='activityType'
                     id='activityType'
                     options={activityOptions}
+                    value= {this.state.activityType}
                     onChange={this.handleDropDown}
                 />
                 <Form.Dropdown
@@ -217,10 +247,12 @@ export default class CreateMeetup extends Component {
                     name="description"
                     id="description"
                     style={{ minHeight: 100}}
+                    value={this.state.description}
                     onChange={(event)=>this.handleChange(event)}
                  />
+                
                 <Button color='teal' fluid size='large' style={{marginTop:'50px'}}  >
-                    Create New Trip
+                    {this.props.context === 'edit'? <>Submit Edits</>:<>Create New Event</>}
                 </Button>
         </Form>
         </>
