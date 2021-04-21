@@ -8,6 +8,7 @@ export default function EventCard (props){
         <>
           <Icon name='user' />
             {spotsLeft + ' Spots Remaining'}
+          <Link to='/event/edit'><Icon name="edit" onClick={()=>{props.setEvent(props.event)}}/></Link>
         </>
       )
     const d = new Date(props.event.date)

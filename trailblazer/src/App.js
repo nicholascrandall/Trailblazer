@@ -6,8 +6,8 @@ import NavBar from './components/NavBar'
 import Events from './components/Events'
 import SearchBar from './components/SearchBar'
 import UserForm from './components/UserForm';
-import CreateMeetup from './components/CreateMeetup';
-import EventPage from './components/EventPage'
+import TripForm from './components/TripForm';
+import EventPage from './components/EventPage';
 
 let baseURL = '' 
 if (process.env.NODE_ENV === 'development'){
@@ -34,8 +34,7 @@ class App extends Component {
     this.setState({
       currentEvent: event
     })
-    console.log(this.state.currentEvent)
-  }
+  } 
 
   logout = () =>{
     const url = baseURL + '/session/'
@@ -50,20 +49,31 @@ class App extends Component {
     }
 
   render() {
-    console.log(this.state.currentUser)
+    // console.log(this.state.currentUser)
     return (
       <div className="App">
         <BrowserRouter>
           <Switch>
-              {/* /// New Event /// */}
-              <Route path="/event/new">
+            {/* /// New Event /// */}
+            <Route path="/event/new">
               <NavBar currentUser={this.state.currentUser} logout={this.logout}/>
               <header className="App-header">
                 <Header className="white" size="huge">Trailblazers</Header>
               </header>
-              <CreateMeetup baseURL={baseURL} currentUser={this.state.currentUser}/>
+              <TripForm context='new' baseURL={baseURL} currentUser={this.state.currentUser}/>
             </Route>
 
+
+            {/* /// Edit Event /// */}
+            <Route path="/event/edit">
+              <NavBar currentUser={this.state.currentUser} logout={this.logout}/>
+              <header className="App-header">
+                <Header className="white" size="huge">Trailblazers</Header>
+              </header>
+              <TripForm context='edit' editEvent={this.state.currentEvent} baseURL={baseURL} currentUser={this.state.currentUser}/>
+            </Route>
+
+      
             {/* EVENT SHOW PAGE */}
             <Route path="/event/meetup">
               <NavBar currentUser={this.state.currentUser} logout={this.logout}/>
@@ -73,6 +83,7 @@ class App extends Component {
               <EventPage baseURL={baseURL} currentUser={this.state.currentUser} currentEvent={this.state.currentEvent} />
             </Route>
 
+
             {/* /// EVENTS INDEX /// */}
             <Route path="/event">
               <NavBar currentUser={this.state.currentUser} logout={this.logout}/>
@@ -80,18 +91,21 @@ class App extends Component {
                 <Header className="white" size="huge">Trailblazers</Header>
               </header>
               <SearchBar baseURL={baseURL} currentUser={this.state.currentUser}/>
-              <Events baseURL={baseURL} setEvent={this.setEvent} />
+              <Events baseURL={baseURL} setEvent={this.setEvent}/>
             </Route>
+
 
             {/* /// User Login /// */}
             <Route path="/user/login">
               <UserForm context='login' baseURL={baseURL} setCurrentUser={this.setCurrentUser}/>
             </Route>
 
+
             {/* /// User Sign Up /// */}
             <Route path="/user/new">
               <UserForm context='signup' baseURL={baseURL} setCurrentUser={this.setCurrentUser}/>
             </Route>
+
 
             {/* /// HOME PAGE /// *** this must be the last route because its the least specific */}
             <Route path="/">
@@ -101,6 +115,8 @@ class App extends Component {
               </header>
               <Header size="large">Home Page</Header>
             </Route>
+
+
           </Switch>
         </BrowserRouter>
       </div>
