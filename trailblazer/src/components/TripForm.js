@@ -39,7 +39,7 @@ const stateOptions = _.map(addressDefinitions.state, (state, index) => ({
     }))
 
   
-export default class CreateMeetup extends Component {
+export default class TripForm extends Component {
     constructor(props) {
         super(props);
         this.props.context === 'new'?
@@ -126,8 +126,8 @@ export default class CreateMeetup extends Component {
             credentials: 'include'
         }).then(response => response.json())
         .then(data => {
-            console.log(data.status);
-            console.log(data);
+            // console.log(data.status);
+            // console.log(data);
             if(data.status === 200) {
                 this.setState({
                     created:true
@@ -138,8 +138,9 @@ export default class CreateMeetup extends Component {
 
     
     render() {
-        console.log(this.props);
-        console.log(this.state);
+        // console.log(this.props);
+        // console.log(this.state);
+
         if (this.state.created) {
             return <Redirect to='/event/' />
           }

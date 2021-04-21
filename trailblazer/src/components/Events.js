@@ -24,16 +24,6 @@ export default class Events extends Component {
         })
       })
     }
-
-    editEvent = (data) => {
-      const copyEvents = [...this.state.events]
-      const index = this.state.events.findIndex(event => event._id === data._id)
-      copyEvents[index] = data
-      console.log(copyEvents[index]);
-      this.setState({
-        events: copyEvents
-      })
-    }
   
     componentDidMount() {
       this.getEvents()

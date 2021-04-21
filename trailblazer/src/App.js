@@ -6,7 +6,7 @@ import NavBar from './components/NavBar'
 import Events from './components/Events'
 import SearchBar from './components/SearchBar'
 import UserForm from './components/UserForm';
-import CreateMeetup from './components/CreateMeetup';
+import TripForm from './components/TripForm';
 
 let baseURL = '' 
 if (process.env.NODE_ENV === 'development'){
@@ -48,7 +48,7 @@ class App extends Component {
     }
 
   render() {
-    console.log(this.state.currentUser)
+    // console.log(this.state.currentUser)
     return (
       <div className="App">
         <BrowserRouter>
@@ -59,7 +59,7 @@ class App extends Component {
               <header className="App-header">
                 <Header className="white" size="huge">Trailblazers</Header>
               </header>
-              <CreateMeetup context='new' baseURL={baseURL} currentUser={this.state.currentUser}/>
+              <TripForm context='new' baseURL={baseURL} currentUser={this.state.currentUser}/>
             </Route>
 
 
@@ -69,7 +69,7 @@ class App extends Component {
               <header className="App-header">
                 <Header className="white" size="huge">Trailblazers</Header>
               </header>
-              <CreateMeetup context='edit' editEvent={this.state.currentEvent} baseURL={baseURL} currentUser={this.state.currentUser}/>
+              <TripForm context='edit' editEvent={this.state.currentEvent} baseURL={baseURL} currentUser={this.state.currentUser}/>
             </Route>
 
 
