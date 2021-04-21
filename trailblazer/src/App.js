@@ -6,7 +6,7 @@ import NavBar from './components/NavBar'
 import Events from './components/Events'
 import SearchBar from './components/SearchBar'
 import UserForm from './components/UserForm';
-import CreateMeetup from './components/CreateMeetup';
+import TripForm from './components/TripForm';
 
 let baseURL = '' 
 if (process.env.NODE_ENV === 'development'){
@@ -29,6 +29,12 @@ class App extends Component {
     })
   }
 
+  setEvent = (event) => {
+    this.setState({
+      currentEvent: event
+    })
+  } 
+
   logout = () =>{
     const url = baseURL + '/session/'
       fetch(url, {method:'DELETE'})
@@ -42,19 +48,30 @@ class App extends Component {
     }
 
   render() {
-    console.log(this.state.currentUser)
+    // console.log(this.state.currentUser)
     return (
       <div className="App">
         <BrowserRouter>
           <Switch>
-              {/* /// New Event /// */}
-              <Route path="/event/new">
+            {/* /// New Event /// */}
+            <Route path="/event/new">
               <NavBar currentUser={this.state.currentUser} logout={this.logout}/>
               <header className="App-header">
                 <Header className="white" size="huge">Trailblazers</Header>
               </header>
-              <CreateMeetup baseURL={baseURL} currentUser={this.state.currentUser}/>
+              <TripForm context='new' baseURL={baseURL} currentUser={this.state.currentUser}/>
             </Route>
+
+
+            {/* /// Edit Event /// */}
+            <Route path="/event/edit">
+              <NavBar currentUser={this.state.currentUser} logout={this.logout}/>
+              <header className="App-header">
+                <Header className="white" size="huge">Trailblazers</Header>
+              </header>
+              <TripForm context='edit' editEvent={this.state.currentEvent} baseURL={baseURL} currentUser={this.state.currentUser}/>
+            </Route>
+
 
             {/* /// EVENTS INDEX /// */}
             <Route path="/event">
@@ -63,18 +80,21 @@ class App extends Component {
                 <Header className="white" size="huge">Trailblazers</Header>
               </header>
               <SearchBar baseURL={baseURL} currentUser={this.state.currentUser}/>
-              <Events baseURL={baseURL}/>
+              <Events baseURL={baseURL} setEvent={this.setEvent}/>
             </Route>
+
 
             {/* /// User Login /// */}
             <Route path="/user/login">
               <UserForm context='login' baseURL={baseURL} setCurrentUser={this.setCurrentUser}/>
             </Route>
 
+
             {/* /// User Sign Up /// */}
             <Route path="/user/new">
               <UserForm context='signup' baseURL={baseURL} setCurrentUser={this.setCurrentUser}/>
             </Route>
+
 
             {/* /// HOME PAGE /// *** this must be the last route because its the least specific */}
             <Route path="/">
@@ -84,6 +104,8 @@ class App extends Component {
               </header>
               <Header size="large">Home Page</Header>
             </Route>
+
+
           </Switch>
         </BrowserRouter>
       </div>
