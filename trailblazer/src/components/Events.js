@@ -28,7 +28,7 @@ export default class Events extends Component {
     componentDidMount() {
       this.getEvents()
     }
-    
+   
     render() {
       return (
         <Container className="event-card-group">

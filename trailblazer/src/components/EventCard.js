@@ -13,12 +13,15 @@ export default function EventCard (props){
       )
     const d = new Date(props.event.date)
     return (
-        <Card
-            image={props.event.img}
-            header={props.event.name}
-            meta={d.toDateString()}
-            description={props.event.details.activityType + ' level ' + props.event.details.difficulty}
-            extra={attendees}
-        />
+        <Link to='/event/meetup'>
+          <Card
+              image={props.event.img}
+              header={props.event.name}
+              meta={d.toDateString()}
+              description={props.event.details.activityType + ' level ' + props.event.details.difficulty}
+              extra={attendees}
+              onClick={() => props.setEvent(props.event)}
+          />
+        </Link>
     )
 }
