@@ -1,11 +1,13 @@
 import { Component } from 'react'
 import {Comment, Header} from 'semantic-ui-react'
+import EventActions from './EventActions';
 
 export default class EventPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            comments: []
+            comments: [],
+            attendees: this.props.currentEvent.attendees
         }
     }
 
@@ -24,7 +26,13 @@ export default class EventPage extends Component {
             })
         })
     }
-
+    addAttendee = (user) => {
+        const copyAttendees = [...this.state.attendees]
+        copyAttendees.push(user)
+        this.setState({
+            attendees: copyAttendees
+        })
+    }
 
     componentDidMount() {
         this.getComments()
@@ -51,10 +59,18 @@ export default class EventPage extends Component {
                 <h3>Max Attendees: {this.props.currentEvent.maxAttendees}</h3>
                 <h3>Current Attendees:</h3>
                 <p>
-                {this.props.currentEvent.attendees.map((attendee) => {
+                {this.state.attendees.map((attendee) => {
                     return `${attendee}, `
                 })}
                 </p>
+
+            <EventActions 
+                baseURL={this.props.baseURL} 
+                currentEvent={this.props.currentEvent} 
+                currentUser={this.props.currentUser}
+                addAttendee={this.addAttendee}
+                />
+
             <Comment.Group classname="comments" size='large'>
                 <Header as='h3' dividing>Comments</Header>
                 {this.state.comments.length === 0 &&

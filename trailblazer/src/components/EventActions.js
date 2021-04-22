@@ -40,7 +40,7 @@ export default class EventActions extends Component {
         .then(data => {
             console.log(data)
             if(data.status === 200){
-                console.log('success');
+                this.props.addAttendee(this.props.currentUser.username)
             }
         })
     }
