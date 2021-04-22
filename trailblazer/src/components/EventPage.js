@@ -1,34 +1,17 @@
 import { Component } from 'react'
 import {Comment, Header} from 'semantic-ui-react'
+import EventActions from './EventActions';
 
 export default class EventPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            comments: []
+            comments: [],
+            attendees: this.props.currentEvent.attendees
         }
     }
 
-    // we already have the event stored in props so shouldn't need
-
-    // getEvent() {
-    //     console.log(this.props.currentEvent)
-    //     const url = this.props.baseURL + '/event/' + this.props.currentEvent._id
-    //     fetch(url, {
-    //         method: 'GET',
-    //         mode: 'cors',
-    //         credentials: 'include',
-    //     })
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         this.setState({
-    //             events: data
-    //         })
-    //     })
-    // }
-
     getComments() {
-        console.log(this.props.currentEvent)
         const url = this.props.baseURL + '/comment/' + this.props.currentEvent._id
         fetch(url, {
             method: 'GET',
@@ -43,20 +26,38 @@ export default class EventPage extends Component {
         })
     }
 
+    addAttendee = (user) => {
+        const copyAttendees = [...this.state.attendees]
+        copyAttendees.push(user)
+        this.setState({
+            attendees: copyAttendees
+        })
+    }
+
+    removeAttendee = (user) => {
+        const copyAttendees = [...this.state.attendees]
+        const index = copyAttendees.findIndex(attendee => attendee === user)
+        if(index !== -1){
+            copyAttendees.splice(index,1)
+            this.setState({
+                attendees: copyAttendees
+            })
+        }
+    }
 
     componentDidMount() {
-        // this.getEvent()
         this.getComments()
     }
 
     render() {
+        const  d = new Date(this.props.currentEvent.date)
+        const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
         return (
             console.log(this.state.comments),
             <div className="eventShow">
                 <h1>{this.props.currentEvent.name}</h1>
                 <h3>{this.props.currentEvent.city}, {this.props.currentEvent.state} </h3>
-                <p>Date: {this.props.currentEvent.date}</p> 
-                {/* we need to find a better way to display the date - either changing it in the backend or having our form convert the data to a string*/}
+                <p>{d.toLocaleDateString('en',dateOptions)}</p> 
                 <hr />
                 <h2>Supplies</h2>
                 <ul>
@@ -69,10 +70,20 @@ export default class EventPage extends Component {
                 <h3>Max Attendees: {this.props.currentEvent.maxAttendees}</h3>
                 <h3>Current Attendees:</h3>
                 <p>
-                {this.props.currentEvent.attendees.map((attendee) => {
-                return `${attendee}, `
+                {this.state.attendees.map((attendee) => {
+                    return `${attendee}, `
                 })}
                 </p>
+
+            <EventActions 
+                baseURL={this.props.baseURL} 
+                currentEvent={this.props.currentEvent} 
+                currentUser={this.props.currentUser}
+                addAttendee={this.addAttendee}
+                removeAttendee={this.removeAttendee}
+                attendees={this.state.attendees}
+                />
+
             <Comment.Group classname="comments" size='large'>
                 <Header as='h3' dividing>Comments</Header>
                 {this.state.comments.length === 0 &&
