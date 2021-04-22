@@ -9,24 +9,6 @@ export default class EventPage extends Component {
         }
     }
 
-    // we already have the event stored in props so shouldn't need
-
-    // getEvent() {
-    //     console.log(this.props.currentEvent)
-    //     const url = this.props.baseURL + '/event/' + this.props.currentEvent._id
-    //     fetch(url, {
-    //         method: 'GET',
-    //         mode: 'cors',
-    //         credentials: 'include',
-    //     })
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         this.setState({
-    //             events: data
-    //         })
-    //     })
-    // }
-
     getComments() {
         console.log(this.props.currentEvent)
         const url = this.props.baseURL + '/comment/' + this.props.currentEvent._id
@@ -45,18 +27,18 @@ export default class EventPage extends Component {
 
 
     componentDidMount() {
-        // this.getEvent()
         this.getComments()
     }
 
     render() {
+        const  d = new Date(this.props.currentEvent.date)
+        const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
         return (
             console.log(this.state.comments),
             <div className="eventShow">
                 <h1>{this.props.currentEvent.name}</h1>
                 <h3>{this.props.currentEvent.city}, {this.props.currentEvent.state} </h3>
-                <p>Date: {this.props.currentEvent.date}</p> 
-                {/* we need to find a better way to display the date - either changing it in the backend or having our form convert the data to a string*/}
+                <p>{d.toLocaleDateString('en',dateOptions)}</p> 
                 <hr />
                 <h2>Supplies</h2>
                 <ul>
