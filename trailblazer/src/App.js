@@ -82,7 +82,7 @@ class App extends Component {
                 <Header className="white" size="huge">Trailblazers</Header>
               </header>
               <EventPage baseURL={baseURL} currentUser={this.state.currentUser} currentEvent={this.state.currentEvent} />
-              <EventActions baseURL={baseURL} currentEvent={this.state.currentEvent} />
+              <EventActions baseURL={baseURL} currentEvent={this.state.currentEvent} currentUser={this.state.currentUser}/>
             </Route>
 
 

@@ -11,7 +11,6 @@ export default class EventActions extends Component {
     }
 
     deleteEvent = (event) => {
-        console.log(event);
         const url = this.props.baseURL + '/event/' + event._id
         fetch(url,{
             method: 'DELETE',
@@ -19,11 +18,29 @@ export default class EventActions extends Component {
             credentials: 'include'
         }).then(response => response.json())
         .then(data => {
-            console.log(data)
             if(data.status === 200){
                 this.setState({
                     deleted: true
                 })
+            }
+        })
+    }
+
+    joinEvent = (event) => {
+        const url = this.props.baseURL + '/event/' + event._id + '/join'
+        const joiningUser = {username: this.props.currentUser.username}
+        fetch(url,{
+            method: 'PATCH',
+            mode: 'cors',
+            credentials: 'include',
+            body: JSON.stringify(joiningUser),
+            headers: {'Content-Type': 'application/json'},
+
+        }).then(response => response.json())
+        .then(data => {
+            console.log(data)
+            if(data.status === 200){
+                console.log('success');
             }
         })
     }
@@ -36,7 +53,7 @@ export default class EventActions extends Component {
             <Button.Group vertical labeled icon>
                 <Button as={Link} to='/event/edit' icon='edit' content='Edit Event' />
                 <Button icon='delete' content='Delete Event' onClick={()=>{this.deleteEvent(this.props.currentEvent)}} />
-                <Button icon='add user' content='Join Event' />
+                <Button icon='add user' content='Join Event' onClick={()=>{this.joinEvent(this.props.currentEvent)}} />
                 <Button icon='user delete' content='Leave Event' />
             </Button.Group>
         )
