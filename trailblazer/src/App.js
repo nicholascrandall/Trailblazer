@@ -38,7 +38,6 @@ class App extends Component {
   } 
 
   editUserInfo = (data) => {
-    console.log(data.data);
     this.setState({
         currentUser: data.data
     })
@@ -57,7 +56,6 @@ class App extends Component {
     }
 
   render() {
-    // console.log(this.state.currentUser)
     return (
       <div className="App">
         <BrowserRouter>

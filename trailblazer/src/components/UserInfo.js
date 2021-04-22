@@ -7,12 +7,17 @@ class UserInfo extends Component{
     constructor(props) {
         super(props);
         this.state = {
+            open: false
         }
     }
 
+    setOpen= (bool)=>{
+        this.setState({
+            open: bool
+        })
+    }
     
     render () {
-        const contextRef = createRef()
         return(
         <Grid centered columns={2}>
             <Grid.Column>
@@ -22,7 +27,6 @@ class UserInfo extends Component{
                 <p>
                     {this.props.currentUser.about? this.props.currentUser.about: <>Add an about me section!</>}
                 </p>
-                <Icon name='edit' color='grey'/>
                 </Segment>
 
                 <Segment>
@@ -35,15 +39,18 @@ class UserInfo extends Component{
                 
 
                 <Rail dividing position='left'>
-                    <Sticky>
+                    <Sticky style={{zIndex: 0}}>
                         <Segment>
-                            <Image src='https://miro.medium.com/max/720/1*W35QUSvGpcLuxPo3SRTH4w.png' />
+                            <Image style={{maxWidth: '240px'}} src={this.props.currentUser.avatar} />
                             <p>Username: {this.props.currentUser.username}</p>
                             <p>Name: {this.props.currentUser.fullname? this.props.currentUser.fullname: <>Add your full name!</> }</p>
                             <Modal
+                                onClose={() => this.setOpen(false)}
+                                onOpen={() => this.setOpen(true)}
+                                open={this.state.open}
                                 trigger={<Icon name='edit'color='grey'/>}
                                 header='Edit Your Information!'
-                                content={<EditUser baseURL={this.props.baseURL} currentUser={this.props.currentUser} editUserInfo={this.props.editUserInfo}/>}
+                                content={<EditUser setOpen={this.setOpen} baseURL={this.props.baseURL} currentUser={this.props.currentUser} editUserInfo={this.props.editUserInfo}/>}
                                 />
                         </Segment>
                     </Sticky>
