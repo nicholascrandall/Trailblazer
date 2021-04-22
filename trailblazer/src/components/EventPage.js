@@ -26,9 +26,19 @@ export default class EventPage extends Component {
             })
         })
     }
+
     addAttendee = (user) => {
         const copyAttendees = [...this.state.attendees]
         copyAttendees.push(user)
+        this.setState({
+            attendees: copyAttendees
+        })
+    }
+
+    removeAttendee = (user) => {
+        const copyAttendees = [...this.state.attendees]
+        const index = copyAttendees.findIndex(attendee => attendee === user)
+        copyAttendees.splice(index,1)
         this.setState({
             attendees: copyAttendees
         })
@@ -69,6 +79,7 @@ export default class EventPage extends Component {
                 currentEvent={this.props.currentEvent} 
                 currentUser={this.props.currentUser}
                 addAttendee={this.addAttendee}
+                removeAttendee={this.removeAttendee}
                 />
 
             <Comment.Group classname="comments" size='large'>

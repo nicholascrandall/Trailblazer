@@ -45,6 +45,25 @@ export default class EventActions extends Component {
         })
     }
 
+    leaveEvent = (event) => {
+        const url = this.props.baseURL + '/event/' + event._id + '/leave'
+        const leavingingUser = {username: this.props.currentUser.username}
+        fetch(url,{
+            method: 'PATCH',
+            mode: 'cors',
+            credentials: 'include',
+            body: JSON.stringify(leavingingUser),
+            headers: {'Content-Type': 'application/json'},
+
+        }).then(response => response.json())
+        .then(data => {
+            console.log(data)
+            if(data.status === 200){
+                this.props.removeAttendee(this.props.currentUser.username)
+            }
+        })
+    }
+
     render(){
         if (this.state.deleted){
             return <Redirect to='/event'/>
@@ -54,7 +73,7 @@ export default class EventActions extends Component {
                 <Button as={Link} to='/event/edit' icon='edit' content='Edit Event' />
                 <Button icon='delete' content='Delete Event' onClick={()=>{this.deleteEvent(this.props.currentEvent)}} />
                 <Button icon='add user' content='Join Event' onClick={()=>{this.joinEvent(this.props.currentEvent)}} />
-                <Button icon='user delete' content='Leave Event' />
+                <Button icon='user delete' content='Leave Event' onClick={()=>{this.leaveEvent(this.props.currentEvent)}}  />
             </Button.Group>
         )
     }
