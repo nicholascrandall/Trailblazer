@@ -26,9 +26,7 @@ export default class SearchBar extends Component {
           })
         .then(response => response.json())
         .then(data => {
-            console.log(url);
-            console.log(data);
-            
+            this.props.searchEvents(data.data)
         })
     }
 

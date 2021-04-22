@@ -90,8 +90,7 @@ class App extends Component {
               <header className="App-header">
                 <Header className="white" size="huge">Trailblazers</Header>
               </header>
-              <SearchBar baseURL={baseURL} currentUser={this.state.currentUser}/>
-              <Events baseURL={baseURL} setEvent={this.setEvent}/>
+              <Events baseURL={baseURL} setEvent={this.setEvent} currentUser={this.state.currentUser} />
             </Route>
 
 
