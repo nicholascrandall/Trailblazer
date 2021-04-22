@@ -1,5 +1,5 @@
-import React, {Component, createRef} from 'react'
-import { Grid, Modal, Icon, Image, Rail, Segment, Header, Sticky } from 'semantic-ui-react'
+import React, {Component} from 'react'
+import { Grid, Modal, Icon, Image, Rail, Segment, Header} from 'semantic-ui-react'
 import Events from './Events'
 import EditUser from './EditUser'
 
@@ -39,8 +39,7 @@ class UserInfo extends Component{
                 
 
                 <Rail dividing position='left'>
-                    <Sticky style={{zIndex: 0}}>
-                        <Segment>
+                        <Segment style={{marginTop: '20px'}}>
                             <Image style={{maxWidth: '240px'}} src={this.props.currentUser.avatar} />
                             <p>Username: {this.props.currentUser.username}</p>
                             <p>Name: {this.props.currentUser.fullname? this.props.currentUser.fullname: <>Add your full name!</> }</p>
@@ -53,7 +52,6 @@ class UserInfo extends Component{
                                 content={<EditUser setOpen={this.setOpen} baseURL={this.props.baseURL} currentUser={this.props.currentUser} editUserInfo={this.props.editUserInfo}/>}
                                 />
                         </Segment>
-                    </Sticky>
                 </Rail>
 
             </Segment>
