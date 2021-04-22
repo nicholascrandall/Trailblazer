@@ -20,7 +20,7 @@ export default function NavBar(props){
                 {props.currentUser?
                     <>
                     <Link to='/' className='nav-link'><Menu.Item>Your Trips</Menu.Item></Link>
-                    <Link to='/' className='nav-link'><Menu.Item>Your Profile</Menu.Item></Link>
+                    <Link to='/user/profile' className='nav-link'><Menu.Item>Your Profile</Menu.Item></Link>
                     </>: null
                 }
                 <Menu.Item position='right'>

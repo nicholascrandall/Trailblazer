@@ -8,6 +8,7 @@ import SearchBar from './components/SearchBar'
 import UserForm from './components/UserForm';
 import TripForm from './components/TripForm';
 import EventPage from './components/EventPage';
+import UserInfo from './components/UserInfo';
 
 let baseURL = '' 
 if (process.env.NODE_ENV === 'development'){
@@ -104,6 +105,15 @@ class App extends Component {
             {/* /// User Sign Up /// */}
             <Route path="/user/new">
               <UserForm context='signup' baseURL={baseURL} setCurrentUser={this.setCurrentUser}/>
+            </Route>
+
+            {/* /// User Profile /// */}
+            <Route path="/user/profile">
+              <NavBar currentUser={this.state.currentUser} logout={this.logout}/>
+              <header className="App-header  profile-header">
+                <Header className="white" size="huge">Your Profile</Header>
+              </header>
+              <UserInfo currentUser={this.state.currentUser}/>
             </Route>
 
 
