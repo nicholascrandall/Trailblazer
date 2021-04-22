@@ -1,5 +1,7 @@
 import { Component } from 'react'
-import {Comment, Header} from 'semantic-ui-react'
+import {Comment, Header, Button} from 'semantic-ui-react'
+import CommentForm from './CommentForm'
+import {Link} from 'react-router-dom'
 
 export default class EventPage extends Component {
     constructor(props) {
@@ -90,6 +92,17 @@ export default class EventPage extends Component {
                     </Comment>
                 })}
             </Comment.Group>
+
+            {this.props.currentUser ? 
+            <CommentForm eventID={this.props.currentEvent._id} currentUser = {this.props.currentUser} baseURL = {this.props.baseURL} />
+            :
+            <Link to='/user/login'>
+            <Button>
+                Log in to add a comment
+            </Button>
+            </Link>
+            }
+            
             </div>
         )
     }
