@@ -29,20 +29,22 @@ export default class EventActions extends Component {
     joinEvent = (event) => {
         const url = this.props.baseURL + '/event/' + event._id + '/join'
         const joiningUser = {username: this.props.currentUser.username}
-        fetch(url,{
-            method: 'PATCH',
-            mode: 'cors',
-            credentials: 'include',
-            body: JSON.stringify(joiningUser),
-            headers: {'Content-Type': 'application/json'},
+        if(!this.props.attendees || this.props.attendees.findIndex(attendee => attendee === this.props.currentUser.username ) === -1){
+            fetch(url,{
+                method: 'PATCH',
+                mode: 'cors',
+                credentials: 'include',
+                body: JSON.stringify(joiningUser),
+                headers: {'Content-Type': 'application/json'},
 
-        }).then(response => response.json())
-        .then(data => {
-            console.log(data)
-            if(data.status === 200){
-                this.props.addAttendee(this.props.currentUser.username)
-            }
-        })
+            }).then(response => response.json())
+            .then(data => {
+                console.log(data)
+                if(data.status === 200){
+                    this.props.addAttendee(this.props.currentUser.username)
+                }
+            })
+        }
     }
 
     leaveEvent = (event) => {

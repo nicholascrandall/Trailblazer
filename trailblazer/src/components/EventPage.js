@@ -12,7 +12,6 @@ export default class EventPage extends Component {
     }
 
     getComments() {
-        console.log(this.props.currentEvent)
         const url = this.props.baseURL + '/comment/' + this.props.currentEvent._id
         fetch(url, {
             method: 'GET',
@@ -38,10 +37,12 @@ export default class EventPage extends Component {
     removeAttendee = (user) => {
         const copyAttendees = [...this.state.attendees]
         const index = copyAttendees.findIndex(attendee => attendee === user)
-        copyAttendees.splice(index,1)
-        this.setState({
-            attendees: copyAttendees
-        })
+        if(index !== -1){
+            copyAttendees.splice(index,1)
+            this.setState({
+                attendees: copyAttendees
+            })
+        }
     }
 
     componentDidMount() {
@@ -80,6 +81,7 @@ export default class EventPage extends Component {
                 currentUser={this.props.currentUser}
                 addAttendee={this.addAttendee}
                 removeAttendee={this.removeAttendee}
+                attendees={this.state.attendees}
                 />
 
             <Comment.Group classname="comments" size='large'>
