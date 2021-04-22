@@ -7,7 +7,9 @@ export default class Events extends Component {
     constructor(props) {
       super(props);
       this.state = {
-        events: []
+        events: [],
+        oldEvents: []
+
       }
     }
   
@@ -28,10 +30,19 @@ export default class Events extends Component {
   
     searchEvents = (searchedEvents) => {
         this.setState({
+          oldEvents: this.state.events,
           events: searchedEvents
         })
     }
     
+    refresh = () => {
+      if (this.state.oldEvents.length > 0) {
+      this.setState({
+        events: this.state.oldEvents
+      })
+      }
+    }
+
     componentDidMount() {
       this.getEvents()
     }
@@ -51,7 +62,7 @@ export default class Events extends Component {
                 />)}
           </Card.Group>
           <Icon 
-            onClick={() => this.getEvents()}
+            onClick={() => this.refresh()}
             color='teal'
             bordered
             inverted 
