@@ -8,7 +8,8 @@ export default class CommentForm extends Component {
         this.state={
             username: this.props.currentUser.username,
             content: '',
-            eventid: this.props.eventID
+            eventid: this.props.eventID,
+            time: Date.now()
         }
     }
 
@@ -28,6 +29,7 @@ export default class CommentForm extends Component {
             credentials: 'include'
         }).then(response => response.json())
         .then(data => {
+            this.props.addComment(this.state)
             this.setState({
                 content: ''
             })

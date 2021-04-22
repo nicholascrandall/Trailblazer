@@ -47,6 +47,14 @@ export default class EventPage extends Component {
         }
     }
 
+    addComment = (comment) => {
+        const copyComments = [...this.state.comments]
+        copyComments.push(comment)
+        this.setState({
+            comments: copyComments
+        })
+    }
+
     componentDidMount() {
         this.getComments()
     }
@@ -105,7 +113,7 @@ export default class EventPage extends Component {
             </Comment.Group>
 
             {this.props.currentUser ? 
-            <CommentForm eventID={this.props.currentEvent._id} currentUser = {this.props.currentUser} baseURL = {this.props.baseURL} />
+            <CommentForm eventID={this.props.currentEvent._id} currentUser = {this.props.currentUser} baseURL = {this.props.baseURL} addComment = {this.addComment} />
             :
             <Link to='/user/login'>
             <Button>
