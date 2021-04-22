@@ -1,36 +1,57 @@
 import { Component } from 'react'
-import {Comment} from 'semantic-ui-react'
+import {Comment, Header} from 'semantic-ui-react'
 
 export default class EventPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            comments: []
         }
     }
 
-    getEvent() {
+    // we already have the event stored in props so shouldn't need
+
+    // getEvent() {
+    //     console.log(this.props.currentEvent)
+    //     const url = this.props.baseURL + '/event/' + this.props.currentEvent._id
+    //     fetch(url, {
+    //         method: 'GET',
+    //         mode: 'cors',
+    //         credentials: 'include',
+    //     })
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         this.setState({
+    //             events: data
+    //         })
+    //     })
+    // }
+
+    getComments() {
         console.log(this.props.currentEvent)
-        const url = this.props.baseURL + '/event/' + this.props.currentEvent._id
+        const url = this.props.baseURL + '/comment/' + this.props.currentEvent._id
         fetch(url, {
             method: 'GET',
             mode: 'cors',
-            credentials: 'include',
+            credentials: 'include'
         })
         .then(response => response.json())
         .then(data => {
             this.setState({
-                events: data.data
+                comments: data
             })
         })
     }
 
+
     componentDidMount() {
-        this.getEvent()
+        // this.getEvent()
+        this.getComments()
     }
 
     render() {
         return (
+            console.log(this.state.comments),
             <div className="eventShow">
                 <h1>{this.props.currentEvent.name}</h1>
                 <h3>{this.props.currentEvent.city}, {this.props.currentEvent.state} </h3>
@@ -52,6 +73,23 @@ export default class EventPage extends Component {
                 return `${attendee}, `
                 })}
                 </p>
+            <Comment.Group classname="comments" size='large'>
+                <Header as='h3' dividing>Comments</Header>
+                {this.state.comments.length === 0 &&
+                    <Header>This event doesn't have any comments yet</Header>
+                }
+                {this.state.comments.map((comment, index) => {
+                    return <Comment key={index}>
+                        <Comment.Content>
+                            <Comment.Author as='a'>{comment.username}</Comment.Author>
+                            <Comment.Metadata>
+                                <div>{comment.time}</div>
+                            </Comment.Metadata>
+                            <Comment.Text>{comment.content}</Comment.Text>
+                        </Comment.Content>
+                    </Comment>
+                })}
+            </Comment.Group>
             </div>
         )
     }
