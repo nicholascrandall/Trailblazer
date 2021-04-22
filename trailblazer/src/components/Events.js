@@ -11,11 +11,19 @@ export default class Events extends Component {
     }
   
     getEvents() {
-      const url = this.props.baseURL + '/event/'
+      let query = ''
+      if(this.props.profile){
+        const today = new Date()
+        console.log(today.toLocaleDateString());
+        this.props.future? query = `?attendees=${this.props.currentUser.username}&date=>=${today}`:
+                           query = `?attendees=${this.props.currentUser.username}&date=<${today}`
+      }
+      const url = this.props.baseURL + '/event/' + query
+
       fetch(url, {
         method: 'GET', 
         mode: 'cors', 
-        credentials: 'include',
+        credentials: 'include'
       })
       .then(response => response.json())
       .then(data => {

@@ -21,7 +21,6 @@ export default class EventCard extends Component {
           <>
             <Icon name='user' />
               {spotsLeft + ' Spots Remaining'}
-            <Link to='/event/edit'><Icon name="edit" onClick={()=>{this.props.setEvent(this.props.event)}}/></Link>
           </>
         )
       const  d = new Date(this.props.event.date)
