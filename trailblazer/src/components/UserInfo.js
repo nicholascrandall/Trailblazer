@@ -1,13 +1,14 @@
 import React, {Component, createRef} from 'react'
-import { Grid, Image, Rail, Segment, Header, Sticky } from 'semantic-ui-react'
+import { Grid, Modal, Icon, Image, Rail, Segment, Header, Sticky } from 'semantic-ui-react'
 import Events from './Events'
+import EditUser from './EditUser'
 
 class UserInfo extends Component{
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+        }
     }
-
 
     
     render () {
@@ -15,12 +16,13 @@ class UserInfo extends Component{
         return(
         <Grid centered columns={2}>
             <Grid.Column>
-            <Segment>
+            <Segment style={{border:'none', boxShadow: 'none'}}>
                 <Segment>
                     <Header size='huge'>About Me</Header>
                 <p>
                     {this.props.currentUser.about? this.props.currentUser.about: <>Add an about me section!</>}
                 </p>
+                <Icon name='edit' color='grey'/>
                 </Segment>
 
                 <Segment>
@@ -33,11 +35,16 @@ class UserInfo extends Component{
                 
 
                 <Rail dividing position='left'>
-                    <Sticky context={contextRef}>
+                    <Sticky>
                         <Segment>
                             <Image src='https://miro.medium.com/max/720/1*W35QUSvGpcLuxPo3SRTH4w.png' />
                             <p>Username: {this.props.currentUser.username}</p>
                             <p>Name: {this.props.currentUser.fullname? this.props.currentUser.fullname: <>Add your full name!</> }</p>
+                            <Modal
+                                trigger={<Icon name='edit'color='grey'/>}
+                                header='Edit Your Information!'
+                                content={<EditUser baseURL={this.props.baseURL} currentUser={this.props.currentUser} editUserInfo={this.props.editUserInfo}/>}
+                                />
                         </Segment>
                     </Sticky>
                 </Rail>

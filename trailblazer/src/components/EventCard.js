@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Card, Icon} from 'semantic-ui-react'
-import {Link, Redirect} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
 
 export default class EventCard extends Component {
     constructor(props) {
@@ -15,7 +15,6 @@ export default class EventCard extends Component {
     }
 
     render() {
-      console.log(this.state);
       const spotsLeft = this.props.event.maxAttendees - this.props.event.attendees.length
       const attendees = (
           <>
