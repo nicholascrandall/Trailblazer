@@ -36,6 +36,12 @@ class App extends Component {
     })
   } 
 
+  editUserInfo = (data) => {
+    this.setState({
+        currentUser: data.data
+    })
+}
+
   logout = () =>{
     const url = baseURL + '/session/'
       fetch(url, {method:'DELETE'})
@@ -49,7 +55,6 @@ class App extends Component {
     }
 
   render() {
-    // console.log(this.state.currentUser)
     return (
       <div className="App">
         <BrowserRouter>
@@ -111,7 +116,7 @@ class App extends Component {
               <header className="App-header  profile-header">
                 <Header className="white" size="huge">Your Profile</Header>
               </header>
-              <UserInfo currentUser={this.state.currentUser} baseURL={baseURL} setEvent={this.setEvent}/>
+              <UserInfo currentUser={this.state.currentUser} baseURL={baseURL} editUserInfo={this.editUserInfo} setEvent={this.setEvent}/>
             </Route>
 
 

@@ -1,21 +1,27 @@
-import React, {Component, createRef} from 'react'
-import { Grid, Image, Rail, Segment, Header, Sticky } from 'semantic-ui-react'
+import React, {Component} from 'react'
+import { Grid, Modal, Icon, Image, Rail, Segment, Header} from 'semantic-ui-react'
 import Events from './Events'
+import EditUser from './EditUser'
 
 class UserInfo extends Component{
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            open: false
+        }
     }
 
-
+    setOpen= (bool)=>{
+        this.setState({
+            open: bool
+        })
+    }
     
     render () {
-        const contextRef = createRef()
         return(
         <Grid centered columns={2}>
             <Grid.Column>
-            <Segment>
+            <Segment style={{border:'none', boxShadow: 'none'}}>
                 <Segment>
                     <Header size='huge'>About Me</Header>
                 <p>
@@ -33,13 +39,19 @@ class UserInfo extends Component{
                 
 
                 <Rail dividing position='left'>
-                    <Sticky context={contextRef}>
-                        <Segment>
-                            <Image src='https://miro.medium.com/max/720/1*W35QUSvGpcLuxPo3SRTH4w.png' />
+                        <Segment style={{marginTop: '20px'}}>
+                            <Image style={{maxWidth: '240px'}} src={this.props.currentUser.avatar} />
                             <p>Username: {this.props.currentUser.username}</p>
                             <p>Name: {this.props.currentUser.fullname? this.props.currentUser.fullname: <>Add your full name!</> }</p>
+                            <Modal
+                                onClose={() => this.setOpen(false)}
+                                onOpen={() => this.setOpen(true)}
+                                open={this.state.open}
+                                trigger={<Icon name='edit'color='grey'/>}
+                                header='Edit Your Information!'
+                                content={<EditUser setOpen={this.setOpen} baseURL={this.props.baseURL} currentUser={this.props.currentUser} editUserInfo={this.props.editUserInfo}/>}
+                                />
                         </Segment>
-                    </Sticky>
                 </Rail>
 
             </Segment>
