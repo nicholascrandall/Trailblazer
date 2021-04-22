@@ -27,11 +27,13 @@ export default class SearchBar extends Component {
         .then(response => response.json())
         .then(data => {
             this.props.searchEvents(data.data)
+            this.setState({
+                searchName: ''
+            })
         })
     }
 
     render() {
-        console.log(this.state)
         return (
             <div className="searchContainer">
                 <form onSubmit={this.handleSubmit}>

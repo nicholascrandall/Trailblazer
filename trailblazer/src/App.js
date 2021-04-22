@@ -4,7 +4,6 @@ import {Header} from 'semantic-ui-react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import NavBar from './components/NavBar'
 import Events from './components/Events'
-import SearchBar from './components/SearchBar'
 import UserForm from './components/UserForm';
 import TripForm from './components/TripForm';
 import EventPage from './components/EventPage';

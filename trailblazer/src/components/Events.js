@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import {Card, Container} from 'semantic-ui-react'
+import {Card, Container, Icon} from 'semantic-ui-react'
 import EventCard from './EventCard'
 import SearchBar from './SearchBar'
 
@@ -27,13 +27,9 @@ export default class Events extends Component {
     }
   
     searchEvents = (searchedEvents) => {
-      if (this.state.events.length > 0) {
         this.setState({
           events: searchedEvents
         })
-      } else {
-        this.getEvents()
-      }
     }
     
     componentDidMount() {
@@ -43,7 +39,8 @@ export default class Events extends Component {
     render() {
       return (
         <>
-        <SearchBar baseURL={this.props.baseURL} currentUser={this.props.currentUser} events={this.state.events} searchEvents={this.searchEvents} />
+        <SearchBar baseURL={this.props.baseURL} currentUser={this.props.currentUser} events={this.state.events} searchEvents={this.searchEvents} getEvents={this.getEvents} />
+        
         <Container className="event-card-group">
           <Card.Group centered itemsPerRow={3} >
             {this.state.events && this.state.events.map(event =>
@@ -53,6 +50,15 @@ export default class Events extends Component {
                 setEvent={this.props.setEvent} 
                 />)}
           </Card.Group>
+          <Icon 
+            onClick={() => this.getEvents()}
+            color='teal'
+            bordered
+            inverted 
+            name='refresh' 
+            link
+            size='large'
+          />
         </Container>
         </>
       );
