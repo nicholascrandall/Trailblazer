@@ -1,27 +1,47 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {Card, Icon} from 'semantic-ui-react'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 
-export default function EventCard (props){
-    const spotsLeft = props.event.maxAttendees - props.event.attendees.length
-    const attendees = (
-        <>
-          <Icon name='user' />
-            {spotsLeft + ' Spots Remaining'}
-          <Link to='/event/edit'><Icon name="edit" onClick={()=>{props.setEvent(props.event)}}/></Link>
-        </>
-      )
-    const d = new Date(props.event.date)
-    return (
-        <Link to='/event/meetup'>
+export default class EventCard extends Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+          clicked: false
+      }
+    }
+  
+    setClicked = () =>{
+      this.setState({clicked: true})
+    }
+
+    render() {
+      console.log(this.state);
+      const spotsLeft = this.props.event.maxAttendees - this.props.event.attendees.length
+      const attendees = (
+          <>
+            <Icon name='user' />
+              {spotsLeft + ' Spots Remaining'}
+            <Link to='/event/edit'><Icon name="edit" onClick={()=>{this.props.setEvent(this.props.event)}}/></Link>
+          </>
+        )
+      const  d = new Date(this.props.event.date)
+
+      if (this.state.clicked) {
+        return <Redirect to='/event/meetup' />
+      }
+
+      return (
           <Card
-              image={props.event.img}
-              header={props.event.name}
+              image={this.props.event.img}
+              header={this.props.event.name}
               meta={d.toDateString()}
-              description={props.event.details.activityType + ' level ' + props.event.details.difficulty}
+              description={this.props.event.details.activityType + ' level ' + this.props.event.details.difficulty}
               extra={attendees}
-              onClick={() => props.setEvent(props.event)}
+              onClick={() => {
+                this.props.setEvent(this.props.event)
+                this.setClicked()
+                }}
           />
-        </Link>
     )
+    }
 }

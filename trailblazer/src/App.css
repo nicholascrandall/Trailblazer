@@ -75,3 +75,13 @@
 .eventShow ul {
   list-style: none;
 }
+
+.nav-link{
+  margin-top: 5px;
+  font-size: 1.1em;
+}
+
+.menu{
+  background-color: rgba(0, 0, 0, 0.50) !important;
+}
+
