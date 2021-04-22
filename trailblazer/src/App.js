@@ -113,7 +113,7 @@ class App extends Component {
               <header className="App-header  profile-header">
                 <Header className="white" size="huge">Your Profile</Header>
               </header>
-              <UserInfo currentUser={this.state.currentUser}/>
+              <UserInfo currentUser={this.state.currentUser} baseURL={baseURL} setEvent={this.setEvent}/>
             </Route>
 
 

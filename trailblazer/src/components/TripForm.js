@@ -46,6 +46,7 @@ export default class TripForm extends Component {
             this.state={
                 created: false,
                 suppliesOptions: suppliesOptions,
+                attendees: [this.props.currentUser.username]
             } :
             this.state={
                 created: false,
@@ -56,6 +57,7 @@ export default class TripForm extends Component {
                 state: this.props.editEvent.state,
                 date: this.props.editEvent.date.split('T')[0],
                 creator: this.props.currentUser.username, 
+                attendees: this.props.editEvent.attendees, 
                 maxAttendees: this.props.editEvent.maxAttendees,
                 difficulty: this.props.editEvent.details.difficulty, 
                 activityType: this.props.editEvent.details.activityType,
@@ -103,6 +105,7 @@ export default class TripForm extends Component {
             state: this.state.state,
             date: this.state.date.split('T')[0],
             creator: this.props.currentUser.username, 
+            attendees: this.state.attendees, 
             maxAttendees: this.state.maxAttendees,
             details:{
                 difficulty: this.state.difficulty, 
@@ -126,8 +129,6 @@ export default class TripForm extends Component {
             credentials: 'include'
         }).then(response => response.json())
         .then(data => {
-            // console.log(data.status);
-            // console.log(data);
             if(data.status === 200) {
                 this.setState({
                     created:true
