@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 export default function NavBar(props){
     return (
         <Menu 
-            className='menu'
+            className='nav-menu'
             fixed='top'
             inverted={true}
             pointing={true}

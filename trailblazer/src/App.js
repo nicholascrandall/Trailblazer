@@ -8,6 +8,7 @@ import SearchBar from './components/SearchBar'
 import UserForm from './components/UserForm';
 import TripForm from './components/TripForm';
 import EventPage from './components/EventPage';
+import EventActions from './components/EventActions';
 
 let baseURL = '' 
 if (process.env.NODE_ENV === 'development'){
@@ -81,6 +82,7 @@ class App extends Component {
                 <Header className="white" size="huge">Trailblazers</Header>
               </header>
               <EventPage baseURL={baseURL} currentUser={this.state.currentUser} currentEvent={this.state.currentEvent} />
+              <EventActions baseURL={baseURL} currentEvent={this.state.currentEvent} />
             </Route>
 
 

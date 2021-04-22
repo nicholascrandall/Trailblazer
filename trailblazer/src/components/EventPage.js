@@ -52,7 +52,7 @@ export default class EventPage extends Component {
                 <h3>Current Attendees:</h3>
                 <p>
                 {this.props.currentEvent.attendees.map((attendee) => {
-                return `${attendee}, `
+                    return `${attendee}, `
                 })}
                 </p>
             <Comment.Group classname="comments" size='large'>
