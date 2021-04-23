@@ -3,13 +3,14 @@ import {Comment, Header, Button, Container, Grid, Segment, Rail, Image} from 'se
 import {Link} from 'react-router-dom'
 import CommentForm from './CommentForm'
 import EventActions from './EventActions';
+import Weather from './Weather'
 
 export default class EventPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
             comments: [],
-            attendees: this.props.currentEvent.attendees
+            attendees: this.props.currentEvent.attendees,
         }
     }
 
@@ -99,6 +100,7 @@ export default class EventPage extends Component {
                             />
                         
                         <p style={{marginTop: '20px', fontSize: '20px'}}>({this.props.currentEvent.maxAttendees - this.state.attendees.length} Spots Left)</p>
+
 
                         <Header as='h2'><u>Attendees</u>:</Header>
                         {this.state.attendees.length>0?
