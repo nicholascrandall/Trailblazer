@@ -81,7 +81,7 @@ export default class EventActions extends Component {
                 <Button icon='add user' size='large' color='green' content='Join Event' onClick={()=>{this.joinEvent(this.props.currentEvent)}} />
                 <Button icon='user delete' size='large' color='blue' content='Leave Event' onClick={()=>{this.leaveEvent(this.props.currentEvent)}}  />
             </Button.Group>:
-            <Button size='large' color='gray'>Login to Join this event!</Button>
+            <Button size='large' color='grey'>Login to Join this event!</Button>
         )
     }
 }

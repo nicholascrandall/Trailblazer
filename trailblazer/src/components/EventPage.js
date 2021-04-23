@@ -60,9 +60,9 @@ export default class EventPage extends Component {
     }
 
     render() {
-        console.log(this.props);
         const d = new Date(this.props.currentEvent.date)
         const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
+        
         return (
             <Container style={{width:'80vw'}}>
               <Grid centered columns={2}>
