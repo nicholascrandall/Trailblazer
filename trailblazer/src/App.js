@@ -82,7 +82,7 @@ class App extends Component {
             {/* EVENT SHOW PAGE */}
             <Route path="/event/meetup">
               <NavBar currentUser={this.state.currentUser} logout={this.logout}/>
-              <header className="App-header profile-header">
+              <header className="App-header trip-header">
                 <Header className="white" size="huge">Trailblazers</Header>
               </header>
               <EventPage baseURL={baseURL} currentUser={this.state.currentUser} currentEvent={this.state.currentEvent} />
