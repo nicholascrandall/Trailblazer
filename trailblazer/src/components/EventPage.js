@@ -64,23 +64,24 @@ export default class EventPage extends Component {
         const d = new Date(this.props.currentEvent.date)
         const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
         return (
-            <Container style={{width:'75vw'}}>
+            <Container style={{width:'80vw'}}>
               <Grid centered columns={2}>
                 <Grid.Column>
-                <Segment>
+                <Segment style={{marginTop:'50px', border:'none', boxShadow: 'none'}}>
                     {/* MAIN CONTENT (Middle) */}
-                    <Header size='huge'>{this.props.currentEvent.name}</Header>
+                    <Header as='h1'>{this.props.currentEvent.name}</Header>
                     <p style={{fontSize: '24px', color: 'grey', lineHeight:'1.2em'}}>{d.toLocaleDateString('en',dateOptions)}</p>
                     <p style={{fontSize: '20px', color: 'grey'}}>{this.props.currentEvent.city + ', '+this.props.currentEvent.state}</p>
                     <Image bordered rounded style={{width:'600px', margin: '0 auto'}} src= {this.props.currentEvent.img}/>
                     <h2>{this.props.currentEvent.details.activityType} - Difficulty: {this.props.currentEvent.details.difficulty}</h2>
                     <Header as='h2'>Details:</Header>
                     <p style={{fontSize: '20px'}}>{this.props.currentEvent.details.description}</p>
-                    <h2>Supplies</h2>
+                    <h2>Supplies:</h2>
                     <ul>
-                        {this.props.currentEvent.details.supplies.map((supply, index) => {
+                        {this.props.currentEvent.details.supplies.length > 0?
+                        this.props.currentEvent.details.supplies.map((supply, index) => {
                             return <li key={index}>{supply}</li>
-                        })}
+                        }):<p style={{fontSize: '20px'}}>No supplies listed. Just bring yourself!</p>}
                     </ul>
 
 
@@ -97,7 +98,7 @@ export default class EventPage extends Component {
                             attendees={this.state.attendees}
                             />
                         
-                        <p style={{marginTop: '10px', fontSize: '20px'}}>({this.props.currentEvent.maxAttendees - this.props.currentEvent.attendees.length} Spots Left)</p>
+                        <p style={{marginTop: '20px', fontSize: '20px'}}>({this.props.currentEvent.maxAttendees - this.props.currentEvent.attendees.length} Spots Left)</p>
 
                         <Header as='h2'><u>Attendees</u>:</Header>
                         {this.state.attendees.length>0?
