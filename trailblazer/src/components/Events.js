@@ -57,8 +57,10 @@ export default class Events extends Component {
     render() {
       return (
         <>
+        {! this.props.profile?
         <SearchBar baseURL={this.props.baseURL} currentUser={this.props.currentUser} events={this.state.events} searchEvents={this.searchEvents} getEvents={this.getEvents} />
-        
+        :null}
+
         <Container className="event-card-group">
           <Card.Group centered itemsPerRow={3} >
             {this.state.events && this.state.events.map(event =>
@@ -68,6 +70,7 @@ export default class Events extends Component {
                 setEvent={this.props.setEvent} 
                 />)}
           </Card.Group>
+          {! this.props.profile?
           <Icon 
             onClick={() => this.refresh()}
             color='teal'
@@ -77,6 +80,7 @@ export default class Events extends Component {
             link
             size='large'
           />
+          :null}
         </Container>
         </>
       );
