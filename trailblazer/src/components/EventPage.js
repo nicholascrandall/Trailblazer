@@ -3,13 +3,14 @@ import {Comment, Header, Button} from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
 import CommentForm from './CommentForm'
 import EventActions from './EventActions';
+import Weather from './Weather'
 
 export default class EventPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
             comments: [],
-            attendees: this.props.currentEvent.attendees
+            attendees: this.props.currentEvent.attendees,
         }
     }
 
@@ -66,7 +67,8 @@ export default class EventPage extends Component {
             <div className="eventShow">
                 <h1>{this.props.currentEvent.name}</h1>
                 <h3>{this.props.currentEvent.city}, {this.props.currentEvent.state} </h3>
-                <p>{d.toLocaleDateString('en',dateOptions)}</p> 
+                <p>{d.toLocaleDateString('en',dateOptions)}</p>
+                <Weather city={this.props.currentEvent.city} />
                 <hr />
                 <h2>Supplies</h2>
                 <ul>
@@ -93,7 +95,7 @@ export default class EventPage extends Component {
                 attendees={this.state.attendees}
                 />
 
-            <Comment.Group classname="comments" size='large'>
+            <Comment.Group className="comments" size='large'>
                 <Header as='h3' dividing>Comments</Header>
                 {this.state.comments.length === 0 &&
                     <Header>This event doesn't have any comments yet</Header>
