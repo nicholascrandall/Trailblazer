@@ -10,23 +10,16 @@ export default class Weather extends Component {
     }
 
     getWeather = () => {
-        const weatherURL = `https://api.openweathermap.org/data/2.5/forecast?q=${this.state.city}&appid=${this.state.apikey}&units=imperial`
-        console.log(weatherURL)
+        const weatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${this.state.city}&appid=${this.state.apikey}&units=imperial`
         fetch(weatherURL)
         .then(response => response.json())
         .then(data => {
-            if (data.cod === "200") {
-            console.log(data)
+            if (data.main) {
             this.setState({
-                forecast: data.list
+                forecast: data
             })
-            } else {
-                console.log(data)
-                this.setState({
-                    error: true
-                })
             }
-            
+            console.log(data)
         })
     }
 
@@ -35,16 +28,20 @@ export default class Weather extends Component {
     }
 
     render() {
-        console.log(this.state)
-        return (
-            <div>
-                {this.state.error ?
-                <h3>Weather Not Found</h3>
-                :
-                <h3>Weather For {this.state.city}</h3>
-                }
-            {/* add weather specifics here */}
-            </div>
-        )
+        if (this.state.forecast) {
+            return (
+                <div>
+                    <p>Temp: {this.state.forecast.main.temp}° F</p>
+                    <p>Wind: {this.state.forecast.wind.speed} MPH</p>
+                    <p>{this.state.forecast.weather[0].description}</p>
+                </div>
+            )
+        } else {
+            return (
+                <div>
+                    <h3>Weather Details Not Found</h3>
+                </div>
+            )
+        }
     }
 }

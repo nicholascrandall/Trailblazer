@@ -109,8 +109,14 @@ export default class EventPage extends Component {
                             </ol>
                             : <h3>Be the first to join this event!</h3>}
                     </Segment>
+                     {/* WEATHER SECTION (Left Rail) */}
+                    <Segment>
+                        <Header as='h2'><u>Current Weather</u></Header>
+                        <Weather city={this.props.currentEvent.city} />
+
+                    </Segment>
                     </Rail>
-                            
+
                     {/* COMMENTS SECTION (Right Rail) */}
                     <Rail dividing position='right' style={{width:'50%'}}>
                     <Segment>
