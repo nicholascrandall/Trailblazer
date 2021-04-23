@@ -11,9 +11,9 @@ import UserInfo from './components/UserInfo';
 
 let baseURL = '' 
 if (process.env.NODE_ENV === 'development'){
-  baseURL = 'http://localhost:3003'
+  baseURL = process.env.REACT_APP_LOCAL_URL
 } else {
-  /// set the url to our deployed app url 
+  baseURL = process.env.REACT_APP_PROD_URL
 }
 
 class App extends Component {
