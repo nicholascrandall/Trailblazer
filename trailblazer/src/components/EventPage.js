@@ -1,6 +1,6 @@
 import { Component } from 'react'
 import {Comment, Header, Button, Container, Grid, Segment, Rail, Image} from 'semantic-ui-react'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 import CommentForm from './CommentForm'
 import EventActions from './EventActions';
 import Weather from './Weather'
@@ -10,7 +10,7 @@ export default class EventPage extends Component {
         super(props);
         this.state = {
             comments: [],
-            attendees: this.props.currentEvent.attendees,
+            attendees: '',
         }
     }
 
@@ -57,10 +57,19 @@ export default class EventPage extends Component {
     }
 
     componentDidMount() {
-        this.getComments()
+        if(this.props.currentEvent && this.props.currentEvent.attendees){
+            this.getComments()
+            this.setState({
+                attendees: this.props.currentEvent.attendees
+            })
+        }
     }
 
     render() {
+        if(!this.props.currentEvent){
+            console.log('redirecting to event ...');
+            return <Redirect to='/event/'/>
+        }else{
         const d = new Date(this.props.currentEvent.date)
         const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
 
@@ -105,7 +114,7 @@ export default class EventPage extends Component {
                         <Header as='h2'><u>Attendees</u>:</Header>
                         {this.state.attendees.length>0?
                             <ol>
-                                {this.state.attendees.map((attendee) => <li>{attendee}</li>)}
+                                {this.state.attendees.map((attendee,i) => <li key={i}>{attendee}</li>)}
                             </ol>
                             : <h3>Be the first to join this event!</h3>}
                     </Segment>
@@ -155,7 +164,8 @@ export default class EventPage extends Component {
                 </Grid.Column>
             </Grid>
             </Container>
-            // </div>
+         
         )
+      }
     }
 }
