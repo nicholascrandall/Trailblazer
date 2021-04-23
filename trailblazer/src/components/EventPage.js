@@ -62,7 +62,7 @@ export default class EventPage extends Component {
     render() {
         const d = new Date(this.props.currentEvent.date)
         const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
-        
+
         return (
             <Container style={{width:'80vw'}}>
               <Grid centered columns={2}>
@@ -98,7 +98,7 @@ export default class EventPage extends Component {
                             attendees={this.state.attendees}
                             />
                         
-                        <p style={{marginTop: '20px', fontSize: '20px'}}>({this.props.currentEvent.maxAttendees - this.props.currentEvent.attendees.length} Spots Left)</p>
+                        <p style={{marginTop: '20px', fontSize: '20px'}}>({this.props.currentEvent.maxAttendees - this.state.attendees.length} Spots Left)</p>
 
                         <Header as='h2'><u>Attendees</u>:</Header>
                         {this.state.attendees.length>0?
