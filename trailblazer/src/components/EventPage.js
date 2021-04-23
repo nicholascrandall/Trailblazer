@@ -63,7 +63,6 @@ export default class EventPage extends Component {
         const  d = new Date(this.props.currentEvent.date)
         const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
         return (
-            console.log(this.state.comments),
             <div className="eventShow">
                 <h1>{this.props.currentEvent.name}</h1>
                 <h3>{this.props.currentEvent.city}, {this.props.currentEvent.state} </h3>
