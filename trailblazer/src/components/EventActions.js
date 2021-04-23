@@ -39,7 +39,6 @@ export default class EventActions extends Component {
 
             }).then(response => response.json())
             .then(data => {
-                console.log(data)
                 if(data.status === 200){
                     this.props.addAttendee(this.props.currentUser.username)
                 }
@@ -59,7 +58,6 @@ export default class EventActions extends Component {
 
         }).then(response => response.json())
         .then(data => {
-            console.log(data)
             if(data.status === 200){
                 this.props.removeAttendee(this.props.currentUser.username)
             }

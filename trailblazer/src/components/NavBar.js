@@ -19,7 +19,7 @@ export default function NavBar(props){
                 <Link to='/event' className='nav-link'><Menu.Item>Find Meetups</Menu.Item></Link>
                 {props.currentUser?
                     <>
-                    <Link to='/' className='nav-link'><Menu.Item>Your Trips</Menu.Item></Link>
+                    <Link to='/event/new' className='nav-link'><Menu.Item>Create Trip</Menu.Item></Link>
                     <Link to='/user/profile' className='nav-link'><Menu.Item>Your Profile</Menu.Item></Link>
                     </>: null
                 }
