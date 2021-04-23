@@ -62,7 +62,7 @@ class App extends Component {
             {/* /// New Event /// */}
             <Route path="/event/new">
               <NavBar currentUser={this.state.currentUser} logout={this.logout}/>
-              <header className="App-header">
+              <header className="App-header trip-header">
                 <Header className="white" size="huge">Trailblazers</Header>
               </header>
               <TripForm context='new' baseURL={baseURL} currentUser={this.state.currentUser}/>
@@ -72,7 +72,7 @@ class App extends Component {
             {/* /// Edit Event /// */}
             <Route path="/event/edit">
               <NavBar currentUser={this.state.currentUser} logout={this.logout}/>
-              <header className="App-header">
+              <header className="App-header trip-header">
                 <Header className="white" size="huge">Trailblazers</Header>
               </header>
               <TripForm context='edit' editEvent={this.state.currentEvent} baseURL={baseURL} currentUser={this.state.currentUser}/>
@@ -82,7 +82,7 @@ class App extends Component {
             {/* EVENT SHOW PAGE */}
             <Route path="/event/meetup">
               <NavBar currentUser={this.state.currentUser} logout={this.logout}/>
-              <header className="App-header">
+              <header className="App-header trip-header">
                 <Header className="white" size="huge">Trailblazers</Header>
               </header>
               <EventPage baseURL={baseURL} currentUser={this.state.currentUser} currentEvent={this.state.currentEvent} />

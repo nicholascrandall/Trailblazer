@@ -12,9 +12,6 @@ export default function NavBar(props){
             size='large'
             >
             <Container>
-                <Link className='nav-link' to='/'>
-                    <Menu.Item>Home</Menu.Item>
-                </Link>
 
                 <Link to='/event' className='nav-link'><Menu.Item>Find Meetups</Menu.Item></Link>
                 {props.currentUser?
@@ -47,6 +44,7 @@ export default function NavBar(props){
                     </>
                     }
                 </Menu.Item>
+
             </Container>
         </Menu>
     )
