@@ -6,7 +6,7 @@
 }
 
 .App-header {
-  /* background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('https://i0.wp.com/images-prod.healthline.com/hlcmsresource/images/topic_centers/2019-8/couple-hiking-mountain-climbing-1296x728-header.jpg?w=1155&h=1528'); */
+  /* https://i0.wp.com/images-prod.healthline.com/hlcmsresource/images/topic_centers/2019-8/couple-hiking-mountain-climbing-1296x728-header.jpg?w=1155&h=1528 */
   background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('./images/hiking-banner.jpg');
   background-position: center;
   background-size: cover;
@@ -20,14 +20,14 @@
 }
 
 .profile-header {
-  /* background: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) ), url('https://d36hbyt2dpr66x.cloudfront.net/wp-content/uploads/2021/02/LBlount_20200907_OaklandTrailCrew-40-1-scaled.jpg'); */
+  /*https://d36hbyt2dpr66x.cloudfront.net/wp-content/uploads/2021/02/LBlount_20200907_OaklandTrailCrew-40-1-scaled.jpg */
   background: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) ), url('./images/user-profile-banner.jpeg');
   min-height: 40vh;
   background-position: 40%;
 }
 
 .trip-header {
-  /* background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4) ), url('https://www.rei.com/dam/skrobecki_111116_0086_main_lg.jpg'); */
+  /* https://www.rei.com/dam/skrobecki_111116_0086_main_lg.jpg*/
   background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4) ), url('./images/hikers-sm-banner.jpeg');
   min-height: 30vh;
   background-position: 50% 10%;
@@ -83,7 +83,7 @@
 }
 
 .user-header{
-  /* background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('https://media.deseretdigital.com/file/3ae0ba3723?type=jpeg&quality=55&c=15&a=4379240d'); */
+  /* https://media.deseretdigital.com/file/3ae0ba3723?type=jpeg&quality=55&c=15&a=4379240d */
   background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('./images/login-hikers.jpeg');
   height: 100vh; 
   width: 50vw;
