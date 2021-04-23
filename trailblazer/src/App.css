@@ -24,6 +24,14 @@
   background-position: 40%;
 }
 
+.trip-header {
+  background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4) ), url('https://www.rei.com/dam/skrobecki_111116_0086_main_lg.jpg');
+  min-height: 30vh;
+  background-position: 50% 10%;
+  background-size: cover;
+
+}
+
 .white {
   color: white !important;
   font-family: 'Poppins', sans-serif !important;
@@ -90,3 +98,6 @@
   background-color: rgba(0, 0, 0, 0.6) !important;
 }
 
+.refresh {
+  padding-top: 50px;
+}
