@@ -93,7 +93,7 @@ export default class EventPage extends Component {
                 attendees={this.state.attendees}
                 />
 
-            <Comment.Group classname="comments" size='large'>
+            <Comment.Group className="comments" size='large'>
                 <Header as='h3' dividing>Comments</Header>
                 {this.state.comments.length === 0 &&
                     <Header>This event doesn't have any comments yet</Header>

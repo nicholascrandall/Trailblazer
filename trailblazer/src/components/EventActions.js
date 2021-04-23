@@ -68,10 +68,16 @@ export default class EventActions extends Component {
         if (this.state.deleted){
             return <Redirect to='/event'/>
         }
+        console.log(this.props.currentUser.username, this.props.currentEvent.creator)
         return(
             <Button.Group vertical labeled icon>
+            {this.props.currentUser.username === this.props.currentEvent.creator?
+                <>
                 <Button as={Link} to='/event/edit' icon='edit' content='Edit Event' />
                 <Button icon='delete' content='Delete Event' onClick={()=>{this.deleteEvent(this.props.currentEvent)}} />
+                </>
+                :null}
+
                 <Button icon='add user' content='Join Event' onClick={()=>{this.joinEvent(this.props.currentEvent)}} />
                 <Button icon='user delete' content='Leave Event' onClick={()=>{this.leaveEvent(this.props.currentEvent)}}  />
             </Button.Group>
