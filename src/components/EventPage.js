@@ -74,7 +74,7 @@ export default class EventPage extends Component {
         const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
 
         return (
-            <Container style={{width:'80vw'}}>
+            <Container style={{minHeight:'60vh', width:'80vw', marginBottom:'5vh'}}>
               <Grid centered columns={2}>
                 <Grid.Column>
                 <Segment style={{marginTop:'50px', border:'none', boxShadow: 'none'}}>
