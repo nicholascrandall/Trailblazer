@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Form, Button, Header} from 'semantic-ui-react'
+import {Form, Button, Header, Container} from 'semantic-ui-react'
 import { Redirect } from "react-router-dom";
 import faker from 'faker'
 import _ from 'lodash'
@@ -266,6 +266,7 @@ export default class TripForm extends Component {
                     {this.props.context === 'edit'? <>Submit Edits</>:<>Create New Event</>}
                 </Button>
         </Form>
+        <Container style={{height:'5vh'}}></Container>
         </>
         )
     }

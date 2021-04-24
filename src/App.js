@@ -1,6 +1,6 @@
 import './App.css';
 import { Component } from 'react';
-import {Header} from 'semantic-ui-react'
+import {Container, Header} from 'semantic-ui-react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import NavBar from './components/NavBar'
 import Events from './components/Events'
@@ -148,7 +148,7 @@ class App extends Component {
               <header className="App-header">
                 <Header className="white" size="huge">Trailblazers</Header>
               </header>
-              <Header size="large">Home Page</Header>
+              <Header className="home-header" size="large">Home Page</Header>
               <footer className="footer-home">
                 <Footer />
               </footer>

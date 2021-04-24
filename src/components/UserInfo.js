@@ -29,7 +29,7 @@ class UserInfo extends Component{
                 </p>
                 </Segment>
 
-                <Segment>
+                <Segment style={{minWidth:'60vh'}}>
                     <Header size='huge'>Your Trips</Header>
                     <Header>Upcoming Trips</Header>
                     <Events profile={true} future={true} baseURL={this.props.baseURL} setEvent={this.props.setEvent} currentUser={this.props.currentUser}/>
