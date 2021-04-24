@@ -48,7 +48,6 @@ class App extends Component {
       fetch(url, {method:'DELETE'})
       .then(response=> response.json())
       .then(data => {
-        console.log(data)
         this.setState({
           currentUser: ''
         })
