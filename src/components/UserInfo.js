@@ -19,7 +19,7 @@ class UserInfo extends Component{
     
     render () {
         return(
-        <Grid centered columns={2}>
+        <Grid centered columns={2} style={{minHeight:'60vh'}}>
             <Grid.Column>
             <Segment style={{border:'none', boxShadow: 'none'}}>
                 <Segment>
@@ -29,7 +29,7 @@ class UserInfo extends Component{
                 </p>
                 </Segment>
 
-                <Segment style={{minWidth:'60vh'}}>
+                <Segment>
                     <Header size='huge'>Your Trips</Header>
                     <Header>Upcoming Trips</Header>
                     <Events profile={true} future={true} baseURL={this.props.baseURL} setEvent={this.props.setEvent} currentUser={this.props.currentUser}/>
