@@ -1,6 +1,6 @@
 import './App.css';
 import { Component } from 'react';
-import {Container, Header} from 'semantic-ui-react'
+import {Header} from 'semantic-ui-react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import NavBar from './components/NavBar'
 import Events from './components/Events'
@@ -48,7 +48,6 @@ class App extends Component {
       fetch(url, {method:'DELETE'})
       .then(response=> response.json())
       .then(data => {
-        console.log(data)
         this.setState({
           currentUser: ''
         })

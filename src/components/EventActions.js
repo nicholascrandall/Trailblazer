@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Modal, Container, Icon } from 'semantic-ui-react'
+import { Button, Modal, Container} from 'semantic-ui-react'
 import { Link, Redirect } from 'react-router-dom'
 
 export default class EventActions extends Component {

@@ -18,7 +18,7 @@ export default class Footer extends Component {
                     as='a' 
                     href="https://github.com/nicholascrandall/Trailblazer" 
                     target="_blank" 
-                    src='/Github-mark.png' 
+                    src='/github_mark.png'
                     style={{maxWidth:'30px', display:'inline-block'}}/>
             </Container>
             </Segment>

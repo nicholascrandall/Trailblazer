@@ -19,7 +19,6 @@ export default class Weather extends Component {
                 forecast: data
             })
             }
-            console.log(data)
         })
     }
 
