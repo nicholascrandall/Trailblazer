@@ -1,7 +1,7 @@
 import './App.css';
 import { Component } from 'react';
-import {Header} from 'semantic-ui-react'
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import {Button, Header} from 'semantic-ui-react'
+import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import NavBar from './components/NavBar'
 import Events from './components/Events'
 import UserForm from './components/UserForm';
@@ -147,7 +147,9 @@ class App extends Component {
               <header className="App-header">
                 <Header className="white" size="huge">Trailblazers</Header>
               </header>
-              <Header className="home-header" size="large">Home Page</Header>
+              <Header className="home-header" size="large">
+                <Button as={Link} size='huge' color='teal' to='/event/'> Find Meetups </Button>
+              </Header>
               <footer className="footer-home">
                 <Footer />
               </footer>

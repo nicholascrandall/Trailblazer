@@ -61,7 +61,7 @@ export default class Events extends Component {
         <SearchBar baseURL={this.props.baseURL} currentUser={this.props.currentUser} events={this.state.events} searchEvents={this.searchEvents} getEvents={this.getEvents} />
         :null}
 
-        <Container className="event-card-group">
+        <Container className="event-card-group" style={{minHeight:'30vh'}}>
           <Card.Group centered itemsPerRow={3} >
             {this.state.events && this.state.events.map(event =>
               <EventCard 
