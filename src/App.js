@@ -8,6 +8,7 @@ import UserForm from './components/UserForm';
 import TripForm from './components/TripForm';
 import EventPage from './components/EventPage';
 import UserInfo from './components/UserInfo';
+import Footer from './components/Footer'
 
 let baseURL = '' 
 if (process.env.NODE_ENV === 'development'){
@@ -66,6 +67,9 @@ class App extends Component {
                 <Header className="white" size="huge">Trailblazers</Header>
               </header>
               <TripForm context='new' baseURL={baseURL} currentUser={this.state.currentUser}/>
+              <footer>
+                <Footer />
+              </footer>
             </Route>
 
 
@@ -76,6 +80,9 @@ class App extends Component {
                 <Header className="white" size="huge">Trailblazers</Header>
               </header>
               <TripForm context='edit' editEvent={this.state.currentEvent} baseURL={baseURL} currentUser={this.state.currentUser}/>
+              <footer>
+                <Footer />
+              </footer>
             </Route>
 
       
@@ -86,6 +93,9 @@ class App extends Component {
                 <Header className="white" size="huge">Trailblazers</Header>
               </header>
               <EventPage baseURL={baseURL} currentUser={this.state.currentUser} currentEvent={this.state.currentEvent} />
+              <footer>
+                <Footer />
+              </footer>
             </Route>
 
 
@@ -96,18 +106,27 @@ class App extends Component {
                 <Header className="white" size="huge">Trailblazers</Header>
               </header>
               <Events baseURL={baseURL} setEvent={this.setEvent} currentUser={this.state.currentUser} />
+              <footer>
+                <Footer />
+              </footer>
             </Route>
 
 
             {/* /// User Login /// */}
             <Route path="/user/login">
               <UserForm context='login' baseURL={baseURL} setCurrentUser={this.setCurrentUser}/>
+              <footer>
+                <Footer />
+              </footer>
             </Route>
 
 
             {/* /// User Sign Up /// */}
             <Route path="/user/new">
               <UserForm context='signup' baseURL={baseURL} setCurrentUser={this.setCurrentUser}/>
+              <footer>
+                <Footer />
+              </footer>
             </Route>
 
             {/* /// User Profile /// */}
@@ -117,6 +136,9 @@ class App extends Component {
                 <Header className="white" size="huge">Your Profile</Header>
               </header>
               <UserInfo currentUser={this.state.currentUser} baseURL={baseURL} editUserInfo={this.editUserInfo} setEvent={this.setEvent}/>
+              <footer>
+                <Footer />
+              </footer>
             </Route>
 
 
@@ -127,6 +149,9 @@ class App extends Component {
                 <Header className="white" size="huge">Trailblazers</Header>
               </header>
               <Header size="large">Home Page</Header>
+              <footer className="footer-home">
+                <Footer />
+              </footer>
             </Route>
 
 
