@@ -3,7 +3,7 @@
 
 [Backend Repo](https://github.com/nicholascrandall/Trailblazer_API)
 
-[Heroku Deployment](heroku.com)
+[Heroku Deployment](https://trailblazers-app.herokuapp.com/event)
 
 Trailblazer is a Full Stack Web Application that provides users with all the information they need to plan out their perfect day in the woods!
 
