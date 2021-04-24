@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
-import { Button } from 'semantic-ui-react'
+import { Button, Modal, Container, Icon } from 'semantic-ui-react'
 import { Link, Redirect } from 'react-router-dom'
 
 export default class EventActions extends Component {
     constructor(props) {
         super(props);
         this.state={
-            deleted: false
+            deleted: false,
+            open: false
         }
     }
 
@@ -64,6 +65,12 @@ export default class EventActions extends Component {
         })
     }
 
+    setOpen = (bool) =>{
+        this.setState({
+            open: bool
+        })
+    }
+
     render(){
         if (this.state.deleted){
             return <Redirect to='/event'/>
@@ -75,7 +82,19 @@ export default class EventActions extends Component {
                 {this.props.currentUser && this.props.currentUser.username === this.props.currentEvent.creator?
                 <>
                 <Button as={Link} to='/event/edit' color='yellow' size='large' icon='edit' content='Edit Event' />
-                <Button icon='delete' size='large' color='red' content='Delete Event' onClick={()=>{this.deleteEvent(this.props.currentEvent)}} />
+                <Modal
+                    onClose={() => this.setOpen(false)}
+                    onOpen={() => this.setOpen(true)}
+                    open={this.state.open}
+                    trigger={<Button icon='delete' size='large' color='red' content='Delete Event'/>}
+                    header='Are you Sure you want to delete this trip?'
+                    content={
+                    <Container style={{width:'30%', margin:'20px auto'}}>
+                        <p style={{margin:'20px 0', fontSize:'16px'}}>This action cannot be undone</p>  
+                        <Button onClick={()=>this.setOpen(false)}>Cancel</Button>
+                        <Button color='red' onClick={()=>{this.deleteEvent(this.props.currentEvent)}}>Yes, Delete</Button>
+                    </Container>}
+                    />
                 </>:null}
 
                 <Button icon='add user' size='large' color='green' content='Join Event' onClick={()=>{this.joinEvent(this.props.currentEvent)}} />
